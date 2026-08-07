@@ -1,0 +1,140 @@
+@import "@fontsource/open-sans/latin-300.css";
+@import "@fontsource/open-sans/latin-400.css";
+@import "@fontsource/open-sans/latin-500.css";
+@import "@fontsource/open-sans/latin-600.css";
+@import "@fontsource/open-sans/latin-700.css";
+@import "@fontsource/open-sans/latin-800.css";
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #000;
+}
+
+@keyframes hero-copy-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes marketing-signal {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: calc(100% - 12px);
+    opacity: 0;
+  }
+}
+
+@keyframes marketing-stage-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes marketing-live-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgb(170 197 81 / 55%);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgb(170 197 81 / 0%);
+  }
+}
+
+.hero-interactive::before {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  content: "";
+  background:
+    radial-gradient(circle at 50% 40%, transparent 0, rgb(0 0 0 / 5%) 48%, rgb(0 0 0 / 72%) 100%),
+    repeating-linear-gradient(0deg, rgb(255 255 255 / 1.2%) 0 1px, transparent 1px 4px);
+  mix-blend-mode: screen;
+}
+
+.hero-brand-copy {
+  animation: hero-copy-reveal 1.15s ease 1.45s both;
+}
+
+.marketing-grid {
+  background-image:
+    linear-gradient(rgb(255 255 255 / 2.5%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(255 255 255 / 2.5%) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, transparent, black 24%, black 78%, transparent);
+}
+
+.marketing-board::after {
+  position: absolute;
+  top: -1px;
+  right: 12%;
+  left: 12%;
+  height: 1px;
+  content: "";
+  background: linear-gradient(90deg, transparent, #aac551, transparent);
+  box-shadow: 0 0 18px rgb(170 197 81 / 60%);
+}
+
+.marketing-flow::before {
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: 3px;
+  width: 1px;
+  content: "";
+  background: linear-gradient(to bottom, #aac551, #1c3d72 55%, rgb(170 197 81 / 20%));
+  transform: translateX(0.75rem);
+}
+
+.marketing-flow::after {
+  position: absolute;
+  left: calc(0.75rem - 3px);
+  width: 7px;
+  height: 12px;
+  border-radius: 999px;
+  content: "";
+  background: #aac551;
+  box-shadow: 0 0 14px #aac551;
+  animation: marketing-signal 4.8s ease-in-out infinite;
+}
+
+.marketing-stage {
+  animation: marketing-stage-enter 0.75s ease both;
+}
+
+.marketing-live {
+  animation: marketing-live-pulse 1.8s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-brand-copy,
+  .marketing-flow::after,
+  .marketing-stage,
+  .marketing-live {
+    animation: none;
+  }
+}
