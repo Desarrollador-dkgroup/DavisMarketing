@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useLoader, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader.js";
@@ -10,6 +10,101 @@ const WHITE = new THREE.Color("#ffffff");
 function seededRandom(seed) {
   const value = Math.sin(seed * 999.91) * 43758.5453;
   return value - Math.floor(value);
+}
+
+function CameraRig() {
+  const { camera, gl } = useThree();
+  const drag = useRef({ active: false, pointerId: null, x: 0, y: 0 });
+  const target = useRef({ x: 0, y: 0 });
+
+  useEffect(() => {
+    const canvas = gl.domElement;
+    const previousCursor = canvas.style.cursor;
+    const previousTouchAction = canvas.style.touchAction;
+
+    const finishDrag = () => {
+      drag.current.active = false;
+      drag.current.pointerId = null;
+      target.current.x = 0;
+      target.current.y = 0;
+      canvas.style.cursor = "grab";
+    };
+
+    const handlePointerDown = (event) => {
+      if (event.button !== 0) return;
+
+      drag.current.active = true;
+      drag.current.pointerId = event.pointerId;
+      drag.current.x = event.clientX;
+      drag.current.y = event.clientY;
+      canvas.setPointerCapture(event.pointerId);
+      canvas.style.cursor = "grabbing";
+    };
+
+    const handlePointerMove = (event) => {
+      if (!drag.current.active) return;
+
+      const movementX = event.clientX - drag.current.x;
+      const movementY = event.clientY - drag.current.y;
+      drag.current.x = event.clientX;
+      drag.current.y = event.clientY;
+
+      target.current.x = THREE.MathUtils.clamp(
+        target.current.x - movementX * 0.10,
+        -2.4,
+        2.4,
+      );
+      target.current.y = THREE.MathUtils.clamp(
+        target.current.y + movementY * 0.1,
+        -1.35,
+        1.35,
+      );
+    };
+
+    const handlePointerUp = (event) => {
+      if (drag.current.pointerId === event.pointerId && canvas.hasPointerCapture(event.pointerId)) {
+        canvas.releasePointerCapture(event.pointerId);
+      }
+      finishDrag();
+    };
+
+    canvas.style.cursor = "grab";
+    canvas.style.touchAction = "none";
+    canvas.addEventListener("pointerdown", handlePointerDown);
+    canvas.addEventListener("pointermove", handlePointerMove);
+    canvas.addEventListener("pointerup", handlePointerUp);
+    canvas.addEventListener("pointercancel", finishDrag);
+
+    return () => {
+      canvas.style.cursor = previousCursor;
+      canvas.style.touchAction = previousTouchAction;
+      canvas.removeEventListener("pointerdown", handlePointerDown);
+      canvas.removeEventListener("pointermove", handlePointerMove);
+      canvas.removeEventListener("pointerup", handlePointerUp);
+      canvas.removeEventListener("pointercancel", finishDrag);
+    };
+  }, [gl]);
+
+  useFrame((_, delta) => {
+    const damping = drag.current.active ? 9 : 3.2;
+
+    camera.position.x = THREE.MathUtils.damp(
+      camera.position.x,
+      target.current.x,
+      damping,
+      delta,
+    );
+    camera.position.y = THREE.MathUtils.damp(
+      camera.position.y,
+      target.current.y,
+      damping,
+      delta,
+    );
+    camera.position.z = 12;
+    camera.lookAt(0, 0, 0);
+  });
+
+  return null;
 }
 
 function BrandParticles() {
@@ -169,28 +264,25 @@ function ExtrudedLogo() {
   /* LOGO */
   return (
     <group ref={outerRef} scale={0.01}>
-      {/* <group position={[-4.9, 2.2, 0]} scale={[0.0118, -0.0118, 0.0118]}>
+      <group position={[-4.9, 2.2, 0]} scale={[0.0118, -0.0118, 0.0118]}>
         {meshes.filter(({ pathIndex }) => pathIndex < 2).map(({ id, geometry }) => (
           <mesh key={id} geometry={geometry} castShadow receiveShadow>
             <meshStandardMaterial
               color="#AAC551"
-              emissive="#26300c"
-              emissiveIntensity={0.55}
-              metalness={0.08}
-              roughness={0.34}
+              
             />
           </mesh>
         ))} 
-      </group> */}
+      </group>
 
       <mesh position={[-0.4,1.6, 0.38]} castShadow>
         <sphereGeometry args={[0.49, 50, 48]} />
         <meshStandardMaterial
           color="#1C3D72"
-          emissive="#071c39"
-          emissiveIntensity={0.75}
-          metalness={0.12}
-          roughness={0.26}
+          emissive="#000000"
+          emissiveIntensity={0}
+          metalness={0}
+          roughness={0.85}
         />
       </mesh>  
     </group>
@@ -200,6 +292,7 @@ function ExtrudedLogo() {
 function Scene() {
   return (
     <>
+      <CameraRig />
       <color attach="background" args={["#050606"]} />
       <fog attach="fog" args={["#050606", 11, 24]} />
       <ambientLight intensity={1.15} />
