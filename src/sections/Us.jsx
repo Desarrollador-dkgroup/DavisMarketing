@@ -53,18 +53,18 @@ function Us() {
             </div>
 
             <h2 id="nosotros-title" className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl xl:text-6xl">
-              No hacemos ruido.
+              No hacemos ruido
               <br />
-              Creamos impacto<span className="text-[#AAC551]">.</span>
+              <span className="text-[#AAC551]">Creamos impacto</span>
             </h2>
 
-            <span aria-hidden="true" className="my-8 block h-px w-16 bg-[#AAC551]" />
+            {/* <span aria-hidden="true" className="my-8 block h-px w-16 bg-[#AAC551]" />
             <p className="text-base leading-8 text-white/72 sm:text-lg">
               Diseñamos estrategias de marketing que convierten atención en conexión,
               y conexión en resultados para tu marca.
-            </p>
+            </p> */}
 
-            <div className="mt-10 flex flex-wrap gap-2 text-[11px] font-bold tracking-[0.16em]">
+           {/*  <div className="mt-10 flex flex-wrap gap-2 text-[11px] font-bold tracking-[0.16em]">
               {marketingStages.map((stage, index) => (
                 <div key={stage.name} className="flex items-center gap-2">
                   <span className="rounded-full border border-white/20 px-3 py-2 text-white/70">
@@ -73,10 +73,10 @@ function Us() {
                   {index < marketingStages.length - 1 && <span aria-hidden="true" className="text-[#AAC551]">→</span>}
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
 
-          <div className="marketing-board relative border border-white/15 bg-[#070808]/85 p-4 shadow-2xl sm:p-7">
+          {/* <div className="marketing-board relative border border-white/15 bg-[#070808]/85 p-4 shadow-2xl sm:p-7">
             <div className="mb-7 flex items-center justify-between border-b border-white/10 pb-5">
               <div>
                 <p className="text-[10px] font-bold tracking-[0.22em] text-[#AAC551]">SISTEMA DAVIS</p>
@@ -88,7 +88,7 @@ function Us() {
               </div>
             </div>
 
-            <ol className="marketing-flow relative space-y-3">
+            {/* <ol className="marketing-flow relative space-y-3">
               {marketingStages.map(({ number, name, title, description, Icon }, index) => (
                 <li
                   key={name}
@@ -111,9 +111,9 @@ function Us() {
                     </div>
                   </div>
                 </li>
-              ))}
-            </ol>
-          </div>
+              ))} 
+            </ol> 
+          </div> */}
         </div>
       </div>
 

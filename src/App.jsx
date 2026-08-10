@@ -8,7 +8,7 @@ function App() {
       <div className="">
         <NavBar />
         <HERO />
-        {/* <US /> */}
+        <US />
       </div>
     </main>
   );
