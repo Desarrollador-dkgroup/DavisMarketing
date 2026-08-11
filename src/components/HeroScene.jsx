@@ -31,6 +31,7 @@ function CameraRig() {
     };
 
     const handlePointerDown = (event) => {
+      if (event.pointerType === "touch") return;
       if (event.button !== 0) return;
 
       drag.current.active = true;
@@ -69,7 +70,7 @@ function CameraRig() {
     };
 
     canvas.style.cursor = "grab";
-    canvas.style.touchAction = "none";
+    canvas.style.touchAction = "pan-y";
     canvas.addEventListener("pointerdown", handlePointerDown);
     canvas.addEventListener("pointermove", handlePointerMove);
     canvas.addEventListener("pointerup", handlePointerUp);
