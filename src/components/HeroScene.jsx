@@ -13,7 +13,7 @@ function seededRandom(seed) {
 }
 
 function CameraRig() {
-  const { camera, gl } = useThree();
+  const { camera, gl, size } = useThree();
   const drag = useRef({ active: false, pointerId: null, x: 0, y: 0 });
   const target = useRef({ x: 0, y: 0 });
 
@@ -100,7 +100,7 @@ function CameraRig() {
       damping,
       delta,
     );
-    camera.position.z = 12;
+    camera.position.z = size.width < 640 ? 25 : 12;
     camera.lookAt(0, 0, 0);
   });
 
@@ -294,7 +294,7 @@ function Scene() {
     <>
       <CameraRig />
       <color attach="background" args={["#050606"]} />
-      <fog attach="fog" args={["#050606", 11, 24]} />
+      {/* <fog attach="fog" args={["#050606", 11, 24]} /> */}
       <ambientLight intensity={1.15} />
       <directionalLight position={[4, 7, 8]} intensity={3.2} color="#ffffff" castShadow />
       <pointLight position={[-6, 1, 4]} intensity={28} distance={12} color="#AAC551" />

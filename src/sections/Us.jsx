@@ -58,13 +58,13 @@ function Us() {
               <span className="text-[#AAC551]">Creamos impacto</span>
             </h2>
 
-            {/* <span aria-hidden="true" className="my-8 block h-px w-16 bg-[#AAC551]" />
+            <span aria-hidden="true" className="my-8 block h-px w-16 bg-[#AAC551]" />
             <p className="text-base leading-8 text-white/72 sm:text-lg">
               Diseñamos estrategias de marketing que convierten atención en conexión,
               y conexión en resultados para tu marca.
-            </p> */}
+            </p>
 
-           {/*  <div className="mt-10 flex flex-wrap gap-2 text-[11px] font-bold tracking-[0.16em]">
+            <div className="mt-10 flex flex-wrap gap-2 text-[11px] font-bold tracking-[0.16em]">
               {marketingStages.map((stage, index) => (
                 <div key={stage.name} className="flex items-center gap-2">
                   <span className="rounded-full border border-white/20 px-3 py-2 text-white/70">
@@ -73,29 +73,29 @@ function Us() {
                   {index < marketingStages.length - 1 && <span aria-hidden="true" className="text-[#AAC551]">→</span>}
                 </div>
               ))}
-            </div> */}
+            </div>
           </div>
 
-          {/* <div className="marketing-board relative border border-white/15 bg-[#070808]/85 p-4 shadow-2xl sm:p-7">
+          <div className="marketing-board relative border border-white/15 bg-[#070808]/85 p-4 shadow-2xl sm:p-7">
             <div className="mb-7 flex items-center justify-between border-b border-white/10 pb-5">
               <div>
                 <p className="text-[10px] font-bold tracking-[0.22em] text-[#AAC551]">SISTEMA DAVIS</p>
                 <p className="mt-1 text-sm text-white/55">De una idea a una marca que avanza</p>
               </div>
-              <div className="flex items-center gap-2 text-[10px] font-semibold tracking-widest text-white/45">
-                <span className="marketing-live h-2 w-2 rounded-full bg-[#AAC551]" />
-                EN MOVIMIENTO
-              </div>
             </div>
 
-            {/* <ol className="marketing-flow relative space-y-3">
+            <ol className="marketing-flow relative space-y-3">
               {marketingStages.map(({ number, name, title, description, Icon }, index) => (
                 <li
                   key={name}
-                  className={`marketing-stage group relative z-10 ml-8 border border-white/15 bg-black/85 px-4 py-4 transition duration-500 hover:border-[#AAC551]/70 sm:ml-12 sm:px-5 ${index % 2 === 1 ? "sm:translate-x-7" : "sm:-translate-x-1"}`}
+                  className={`marketing-stage group relative z-10 ml-8 border border-white/15 bg-black/85 
+                    px-4 py-4 transition duration-500 hover:border-[#AAC551]/70 
+                    sm:ml-12 sm:px-5 ${index % 2 === 1 ? "sm:translate-x-7" : "sm:-translate-x-1"}`}
                   style={{ animationDelay: `${index * 130}ms` }}
                 >
-                  <span className="absolute -left-10 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center rounded-full border border-[#AAC551] bg-black text-[10px] font-bold text-[#AAC551] sm:-left-12 sm:h-8 sm:w-8">
+                  <span className="absolute -left-10 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center 
+                  rounded-full border border-[#AAC551] bg-black text-[10px] font-bold text-[#AAC551] 
+                  sm:-left-12 sm:h-8 sm:w-8">
                     {number}
                   </span>
                   <div className="flex items-start gap-4">
@@ -113,7 +113,7 @@ function Us() {
                 </li>
               ))} 
             </ol> 
-          </div> */}
+          </div>
         </div>
       </div>
 
