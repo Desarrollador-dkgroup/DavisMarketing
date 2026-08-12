@@ -67,7 +67,7 @@ function Us() {
             <div className="mt-10 flex flex-wrap gap-2 text-[11px] font-bold tracking-[0.16em]">
               {marketingStages.map((stage, index) => (
                 <div key={stage.name} className="flex items-center gap-2">
-                  <span className="rounded-full border border-white/20 px-3 py-2 text-white/70">
+                  <span className="rounded-full border border-white/40 px-3 py-2 text-white/70">
                     {stage.title.toUpperCase()}
                   </span>
                   {index < marketingStages.length - 1 && <span aria-hidden="true" className="text-[#AAC551]">→</span>}
@@ -117,7 +117,9 @@ function Us() {
         </div>
       </div>
 
-      <div aria-hidden="true" className="pointer-events-none absolute -bottom-[0.16em] left-1/2 -z-0 -translate-x-1/2 whitespace-nowrap text-[23vw] font-extrabold leading-none tracking-[-0.07em] text-transparent opacity-20 [-webkit-text-stroke:1px_#AAC551]">
+      <div aria-hidden="true" className="pointer-events-none absolute -bottom-[0.16em] left-1/2 -z-0 
+      -translate-x-1/2 whitespace-nowrap text-[23vw] font-extrabold leading-none 
+      tracking-[-0.07em] text-transparent opacity-25 [-webkit-text-stroke:1px_#AAC551]">
         MARKETING
       </div>
     </section>

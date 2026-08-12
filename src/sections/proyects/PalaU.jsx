@@ -12,7 +12,7 @@ function PalaU() {
 
             <div className="grid min-h-[520px] lg:grid-cols-[0.78fr_1.22fr]">
                 <div className="relative z-10 flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-12 xl:px-16">
-                    <span aria-hidden="true" className="text-md font-bold leading-none text-white/90 sm:text-md">
+                    <span aria-hidden="true" className="ml-1 text-md font-bold leading-none text-white/90 sm:text-md">
                         LIBRO DIGITAL
                     </span>
                     <h3 className="text-4xl font-bold tracking-tight  sm:text-5xl mt-2 text-white/90">
@@ -30,7 +30,8 @@ function PalaU() {
                             <li
                                 key={name}
                                 className="flex items-center gap-2 rounded-full border border-[#F39200] 
-                                px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-white/90"
+                                px-4 py-2 text-[11px] font-bold uppercase tracking-[0.08em] text-white/90
+                                transition duration-300 hover:scale-103"
                             >
                                 <Icon aria-hidden="true" className="h-4 w-4 text-white/90" strokeWidth={1.6} />
                                 {name}
@@ -55,14 +56,14 @@ function PalaU() {
                         alt="Presentación visual del proyecto Panamá Viajero"
                         className="relative z-10 w-full max-w-[760px] object-contain drop-shadow-[0_24px_55px_rgba(0,0,0,0.65)] transition-transform duration-700 hover:scale-[1.025]"
                     />
-                    {/* <div aria-hidden="true" className="absolute bottom-5 right-5 grid grid-cols-6 gap-2 opacity-55">
+                    <div aria-hidden="true" className="absolute bottom-5 right-5 grid grid-cols-6 gap-2 opacity-55">
                         {Array.from({ length: 18 }, (_, index) => (
                             <span
                                 key={index}
                                 className={`h-1.5 w-1.5 rounded-full ${index % 3 === 0 ? "bg-[#1C3D72]" : "bg-[#AAC551]"}`}
                             />
                         ))}
-                    </div> */}
+                    </div>
                 </div>
             </div>
         </article>

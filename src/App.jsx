@@ -2,6 +2,7 @@ import NavBar from "./components/Navbar";
 import HERO from "./sections/Hero";
 import US from "./sections/Us";
 import PROYECTS from "./sections/Proyects"
+import CONTACT from './sections/Contact'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <HERO />
         <US />
         <PROYECTS/>
+        <CONTACT/>
       </div>
     </main>
   );
