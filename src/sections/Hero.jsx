@@ -11,11 +11,11 @@ function Hero() {
         <HeroScene />
       </div>
 
-      <div className="hero-brand-copy pointer-events-none absolute inset-x-0 bottom-[8vh] z-10 px-6 text-center font-sans">
-        <p className="text-[clamp(1.35rem,3vw,2.5rem)] font-extrabold tracking-[0.13em] text-[#AAC551]">
+      <div className="hero-brand-copy pointer-events-none absolute inset-x-0 bottom-[7vh] z-10 px-6 text-center font-sans">
+        <p className="pl-2 text-[clamp(4.3rem,3vw,9rem)] font-extrabold tracking-[0.13em] text-[#AAC551] mb-[-20px]">
           DAVIS MARKETING
         </p>
-        <p className="mt-1 text-[clamp(0.72rem,1.35vw,1.05rem)] font-light tracking-[0.28em] text-white">
+        <p className=" text-[clamp(2rem,2vw,3rem)] font-light tracking-[0.4em] text-white">
           DESARROLLO &amp; PRODUCCIÓN
         </p>
       </div>

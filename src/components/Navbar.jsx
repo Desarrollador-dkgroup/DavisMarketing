@@ -16,7 +16,7 @@ function Navbar() {
         <>
             {/* Navbar */}
             <nav className="fixed left-0 top-0 z-50 w-full 
-            text-white font-sans">
+            text-white font-sans bg-black/20 backdrop-blur-md">
                 <div className="mx-auto flex h-16 items-center justify-between px-6">
                     <img
                         src={LOGO}

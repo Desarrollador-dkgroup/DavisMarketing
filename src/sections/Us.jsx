@@ -47,7 +47,7 @@ function Us() {
       <div className="relative z-10 mx-auto max-w-[1440px]">
         <div className="grid gap-16 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-20">
           <div className="max-w-xl">
-            <div className="mb-7 flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-[#AAC551]">
+            <div className="mb-5 flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-[#AAC551]">
               <span className="h-px w-11 bg-[#AAC551]" aria-hidden="true" />
               NUESTRA FORMA DE TRABAJAR
             </div>
