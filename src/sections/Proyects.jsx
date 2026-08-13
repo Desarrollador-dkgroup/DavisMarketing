@@ -2,6 +2,9 @@ import { useState } from "react";
 import PanamaViajero from "./proyects/PanamaViajero";
 import ExpoEducate from './proyects/Expoeducate'
 import PalaU from './proyects/PalaU'
+import PanamaViajero2 from "./proyects/PanamaViajero2";
+import Expoeducate2 from "./proyects/Expoeducate2";
+
 
 const projects = [
     {
@@ -61,7 +64,7 @@ function Proyects() {
                     </p>
                 </header>
 
-                <nav aria-label="Seleccionar proyecto" className="mt-5 border-b border-white/15">
+                {/* <nav aria-label="Seleccionar proyecto" className="mt-5 border-b border-white/15">
                     <div className="flex min-w-max gap-8 sm:gap-14 lg:gap-15">
                         {projects.map((project, index) => {
                             const isActive = index === activeIndex;
@@ -90,12 +93,16 @@ function Proyects() {
                     </div>
                 </nav>
 
-                <div
+                */}<div
                     key={`${activeProject.id}-${animationKey}`}
-                    className={direction === "left" ? "project-enter-left" : "project-enter-right"}
+                    className={direction === "left" ? "project-enter-left" : "project-enter-right mt-10 flex gap-5"}
                 >
-                    <ActiveProject />
-                </div>
+                    {/* <ActiveProject /> */}
+                    <PanamaViajero2/>
+                    <Expoeducate2/>
+                    
+                
+                </div> 
             </div>
         </section>
     );

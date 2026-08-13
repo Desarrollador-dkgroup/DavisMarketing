@@ -121,7 +121,7 @@ body {
 }
 
 .contact-logo-sphere {
-  animation: contact-sphere-float 3.8s ease-in-out infinite;
+  animation: contact-sphere-float 5s ease-in-out infinite;
 }
 
 @keyframes project-enter-from-right {

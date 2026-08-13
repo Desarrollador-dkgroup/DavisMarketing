@@ -21,7 +21,8 @@ function PalaU() {
                     <span aria-hidden="true" className="mb-7 mt-4 h-0.5 w-20 bg-[#F39200]" />
 
                     <p className="max-w-lg text-sm leading-7 text-white/90 sm:text-base ">
-                        Libro digital y fisico
+                        Libro digital y fisico dedicado para estudiantes universitario y de secundaria para 
+                        realizar notas y apuntes durante su transcurso academico durante el año.
                     </p>
 
                     <ul className="mt-5 flex flex-col gap-3" aria-label="Servicios desarrollados">
