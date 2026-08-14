@@ -2,8 +2,7 @@ import { useState } from "react";
 import PanamaViajero from "./proyects/PanamaViajero";
 import ExpoEducate from './proyects/Expoeducate'
 import PalaU from './proyects/PalaU'
-import PanamaViajero2 from "./proyects/PanamaViajero2";
-import Expoeducate2 from "./proyects/Expoeducate2";
+
 
 
 const projects = [
@@ -42,7 +41,7 @@ function Proyects() {
         <section
             id="proyectos"
             aria-labelledby="projects-title"
-            className="relative isolate min-h-screen scroll-mt-16 overflow-hidden bg-black px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
+            className="relative isolate min-h-screen overflow-hidden bg-black px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
         >
             <div aria-hidden="true" className="projects-grid absolute inset-0 -z-10" />
             <div aria-hidden="true" className="absolute -right-24 top-24 -z-10 h-72 w-72 rounded-full bg-[#1C3D72]/20 blur-[120px]" />
@@ -64,7 +63,7 @@ function Proyects() {
                     </p>
                 </header>
 
-                {/* <nav aria-label="Seleccionar proyecto" className="mt-5 border-b border-white/15">
+                <nav aria-label="Seleccionar proyecto" className="mt-5 border-b border-white/15">
                     <div className="flex min-w-max gap-8 sm:gap-14 lg:gap-15">
                         {projects.map((project, index) => {
                             const isActive = index === activeIndex;
@@ -93,15 +92,11 @@ function Proyects() {
                     </div>
                 </nav>
 
-                */}<div
+               <div
                     key={`${activeProject.id}-${animationKey}`}
-                    className={direction === "left" ? "project-enter-left" : "project-enter-right mt-10 flex gap-5"}
+                    className={`mt-10 flex gap-5 ${direction === "left" ? "project-enter-left" : "project-enter-right"}`}
                 >
-                    {/* <ActiveProject /> */}
-                    <PanamaViajero2/>
-                    <Expoeducate2/>
-                    
-                
+                    <ActiveProject />
                 </div> 
             </div>
         </section>

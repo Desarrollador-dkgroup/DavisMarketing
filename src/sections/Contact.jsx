@@ -30,7 +30,7 @@ function Contact() {
         <section
             id="contacto"
             aria-labelledby="contact-title"
-            className="relative isolate min-h-screen scroll-mt-16 overflow-hidden bg-black px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
+            className="relative isolate min-h-screen scroll-mt-[-90px] overflow-hidden bg-black px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
         >
             <div aria-hidden="true" className="contact-grid absolute inset-0 -z-10" />
             <div aria-hidden="true" className="absolute -left-20 bottom-0 -z-10 h-64 w-64 rounded-full bg-[#AAC551]/10 blur-[110px]" />
@@ -45,7 +45,7 @@ function Contact() {
                         id="contact-title"
                         className="text-3xl font-bold leading-[1.08] tracking-tight text-white/90 sm:text-5xl xl:text-6xl"
                     >
-                        Sabemos lo importante que es para ti iniciar tu proyecto
+                        Sabemos lo importante que es iniciar tu proyecto
                     </h2>
                     <p className="mt-4 text-base leading-7 text-white/65 sm:text-lg">
                         Por eso nos comprometemos contigo desde el primer contacto
