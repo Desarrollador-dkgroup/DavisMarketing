@@ -32,11 +32,13 @@ body {
     transform: translateY(22px) scaleY(0.15);
     filter: blur(8px);
   }
+
   60% {
     opacity: 1;
     transform: translateY(-2px) scaleY(1.06);
     filter: blur(0);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scaleY(1);
@@ -51,6 +53,7 @@ body {
     letter-spacing: 0.32em;
     filter: blur(5px);
   }
+
   to {
     opacity: 0.92;
     transform: translateY(0);
@@ -64,6 +67,7 @@ body {
     opacity: 0;
     transform: scaleX(0.2);
   }
+
   to {
     opacity: 1;
     transform: scaleX(1);
@@ -150,6 +154,7 @@ body {
     transform: translateY(28px);
     filter: blur(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -163,6 +168,7 @@ body {
     transform: translateY(0.7em) skewY(3deg);
     filter: blur(9px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0) skewY(0);
@@ -218,6 +224,7 @@ body {
     opacity: 0;
     transform: perspective(900px) translateY(55px) rotateZ(var(--creative-card-rotation));
   }
+
   to {
     opacity: 1;
     transform: perspective(900px) rotateX(var(--bridge-tilt-x, 0deg)) rotateY(var(--bridge-tilt-y, 0deg)) rotateZ(var(--creative-card-rotation));
@@ -228,6 +235,7 @@ body {
   from {
     left: 0;
   }
+
   to {
     left: calc(100% - 12px);
   }
@@ -389,20 +397,24 @@ body {
 }
 
 @keyframes contact-mark-float {
+
   0%,
   100% {
     transform: translateY(0) rotateX(0deg);
   }
+
   50% {
     transform: translateY(-12px) rotateX(4deg);
   }
 }
 
 @keyframes contact-sphere-float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-16px);
   }
@@ -491,6 +503,7 @@ body {
     transform: translateX(90px);
     filter: blur(7px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -504,6 +517,7 @@ body {
     transform: translateX(-90px);
     filter: blur(7px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);
@@ -533,6 +547,7 @@ body {
     transform: translateY(18px);
     filter: blur(8px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -545,10 +560,12 @@ body {
     top: 0;
     opacity: 0;
   }
+
   15%,
   85% {
     opacity: 1;
   }
+
   100% {
     top: calc(100% - 12px);
     opacity: 0;
@@ -560,6 +577,7 @@ body {
     opacity: 0;
     transform: translateY(16px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -567,10 +585,12 @@ body {
 }
 
 @keyframes marketing-live-pulse {
+
   0%,
   100% {
     box-shadow: 0 0 0 0 rgb(170 197 81 / 55%);
   }
+
   50% {
     box-shadow: 0 0 0 7px rgb(170 197 81 / 0%);
   }
@@ -600,16 +620,6 @@ body {
   mask-image: linear-gradient(to bottom, transparent, black 24%, black 78%, transparent);
 }
 
-.marketing-board::after {
-  position: absolute;
-  top: -1px;
-  right: 12%;
-  left: 12%;
-  height: 1px;
-  content: "";
-  background: linear-gradient(90deg, transparent, #aac551, transparent);
-  box-shadow: 0 0 18px rgb(170 197 81 / 60%);
-}
 
 .marketing-flow::before {
   position: absolute;
@@ -617,10 +627,18 @@ body {
   bottom: 10px;
   left: 3px;
   width: 1px;
+  /* Aumentado de 1px a 2px para mayor visibilidad */
   content: "";
-  background: linear-gradient(to bottom, #aac551, #1c3d72 55%, rgb(170 197 81 / 20%));
+  background: linear-gradient(to bottom,
+      #aac551,
+      #3b82f6 50%,
+      #aac551 100%);
+  /* Colores más vivos y definidos */
+  box-shadow: 0 0 10px rgba(170, 197, 81, 0.4);
+  /* Resplandor suave a lo largo de toda la línea */
   transform: translateX(0.75rem);
 }
+
 
 .marketing-flow::after {
   position: absolute;

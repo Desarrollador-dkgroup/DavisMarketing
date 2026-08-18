@@ -125,7 +125,7 @@ function CreativeBridge() {
           ))}
         </div>
 
-        <div className="creative-bridge-footer mt-10 flex flex-col gap-6 border-t border-white/12 pt-6 sm:flex-row sm:items-center sm:justify-between lg:mt-0">
+        <div className="creative-bridge-footer mt-10 flex flex-col gap-6 pt-6 sm:flex-row sm:items-center sm:justify-between lg:mt-0">
 
           <a
             href="#proyectos"

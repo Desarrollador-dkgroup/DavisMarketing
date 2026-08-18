@@ -36,7 +36,8 @@ function Us() {
     <section
       id="nosotros"
       aria-labelledby="nosotros-title"
-      className="relative scroll-mt-[-90px] isolate min-h-screen scroll-mt-16 overflow-hidden bg-transparent px-6 py-28 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
+      className="relative scroll-mt-[-90px] isolate min-h-screen scroll-mt-16 
+      overflow-hidden bg-transparent px-6 py-28 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
     >
       <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-60">
         <div className="absolute left-[6%] top-20 h-44 w-44 rounded-full bg-[#1C3D72]/20 blur-[90px]" />
@@ -59,7 +60,7 @@ function Us() {
             </h2>
 
             <span aria-hidden="true" className="my-8 block h-px w-16 bg-[#AAC551]" />
-            <p className="text-base leading-8 text-white/72 sm:text-lg">
+            <p className="text-base leading-8 text-white/90 sm:text-lg">
               Diseñamos estrategias de marketing que convierten atención en conexión,
               y conexión en resultados para tu marca.
             </p>
@@ -67,7 +68,7 @@ function Us() {
             <div className="mt-10 flex flex-wrap gap-2 text-[11px] font-bold tracking-[0.16em]">
               {marketingStages.map((stage, index) => (
                 <div key={stage.name} className="flex items-center gap-2">
-                  <span className="rounded-full border border-white/40 px-3 py-2 text-white/70">
+                  <span className="rounded-full border border-white/80 px-3 py-2 text-white/80">
                     {stage.title.toUpperCase()}
                   </span>
                   {index < marketingStages.length - 1 && <span aria-hidden="true" className="text-[#AAC551]">→</span>}
@@ -76,13 +77,13 @@ function Us() {
             </div>
           </div>
 
-          <div className="marketing-board relative border border-white/15 bg-[#070808]/85 p-4 shadow-2xl sm:p-7">
-            <div className="mb-7 flex items-center justify-between border-b border-white/10 pb-5">
+          <div className="marketing-board relative p-4  sm:p-7">
+            {/* <div className="mb-7 flex items-center justify-between border-b border-white/20 pb-5">
               <div>
-                <p className="text-[10px] font-bold tracking-[0.22em] text-[#AAC551]">SISTEMA DAVIS</p>
-                <p className="mt-1 text-sm text-white/55">De una idea a una marca que avanza</p>
+                <p className="text-[20px] font-bold tracking-[0.22em] text-[#AAC551]">SISTEMA DAVIS</p>
+                <p className="mt-1 text-sm text-white">De una idea a una marca que avanza</p>
               </div>
-            </div>
+            </div> */}
 
             <ol className="marketing-flow relative space-y-3">
               {marketingStages.map(({ number, name, title, description, Icon }, index) => (
@@ -99,7 +100,8 @@ function Us() {
                     {number}
                   </span>
                   <div className="flex items-start gap-4">
-                    <div className="grid h-11 w-11 shrink-0 place-items-center border border-[#1C3D72] bg-[#1C3D72]/20 text-[#AAC551] transition group-hover:bg-[#AAC551] group-hover:text-black">
+                    <div className="grid h-11 w-11 shrink-0 place-items-center border border-[#1C3D72] bg-[#1C3D72]/20 
+                    text-[#AAC551] transition group-hover:bg-[#AAC551] group-hover:text-black">
                       <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
                     </div>
                     <div className="min-w-0">
@@ -111,15 +113,15 @@ function Us() {
                     </div>
                   </div>
                 </li>
-              ))} 
-            </ol> 
+              ))}
+            </ol>
           </div>
         </div>
       </div>
 
-      <div aria-hidden="true" className="pointer-events-none absolute -bottom-[0.16em] left-1/2 -z-0 
+      <div aria-hidden="true" className="pointer-events-none absolute -bottom-[0.11em] left-1/2 -z-0 
       -translate-x-1/2 whitespace-nowrap text-[23vw] font-extrabold leading-none 
-      tracking-[-0.07em] text-transparent opacity-25 [-webkit-text-stroke:1px_#AAC551]">
+      tracking-[-0.07em] text-transparent opacity-100 [-webkit-text-stroke:1px_#AAC551]">
         MARKETING
       </div>
     </section>

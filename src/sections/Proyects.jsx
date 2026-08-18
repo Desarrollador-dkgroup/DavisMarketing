@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PanamaViajero from "./proyects/PanamaViajero";
 import ExpoEducate from './proyects/Expoeducate'
-import PalaU from './proyects/PalaU'
+/* import PalaU from './proyects/PalaU' */
 
 
 
@@ -16,11 +16,11 @@ const projects = [
         name: "Expo Edúcate Superior",
         Component: ExpoEducate,
     },
-    {
+    /* {
         id: "pa-la-u",
         name: "Pa' la U",
         Component: PalaU,
-    },
+    }, */
 ];
 
 function Proyects() {
@@ -58,7 +58,7 @@ function Proyects() {
                     >
                         Proyectos que <br /> <span className="text-[#AAC551] font-sans">inspiran</span>
                     </h2>
-                    <p className="mt-2 text-base leading-7 text-white/65 sm:text-lg font-sans">
+                    <p className="mt-2 text-base leading-7 text-white/90 sm:text-lg font-sans">
                         Creamos experiencias que conectan marcas transformando ideas con proposito.
                     </p>
                 </header>
@@ -74,10 +74,10 @@ function Proyects() {
                                     type="button"
                                     aria-pressed={isActive}
                                     onClick={() => selectProject(index)}
-                                    className={`group relative flex cursor-pointer items-center gap-3 pb-5 text-left transition-colors duration-300 ${isActive ? "text-[#AAC551]" : "text-white/45 hover:text-white"
+                                    className={`group relative flex cursor-pointer items-center gap-3 pb-5 text-left transition-colors duration-300 ${isActive ? "text-[#AAC551]" : "text-white/70 hover:text-white"
                                         }`}
                                 >
-                                    
+
                                     <span className="text-sm font-bold uppercase tracking-[0.08em] sm:text-base">
                                         {project.name}
                                     </span>
@@ -92,12 +92,12 @@ function Proyects() {
                     </div>
                 </nav>
 
-               <div
+                <div
                     key={`${activeProject.id}-${animationKey}`}
                     className={`mt-10 flex gap-5 ${direction === "left" ? "project-enter-left" : "project-enter-right"}`}
                 >
                     <ActiveProject />
-                </div> 
+                </div>
             </div>
         </section>
     );

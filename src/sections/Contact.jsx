@@ -111,7 +111,7 @@ function Contact() {
                                     Razón de contacto
                                 </span>
                                 <textarea
-                                    className="mt-3 min-h-36 w-full resize-y bg-transparent text-sm leading-6 text-white outline-none placeholder:text-white/35"
+                                    className="mt-3 min-h-10 w-full resize-y bg-transparent text-sm leading-6 text-white outline-none placeholder:text-white/35"
                                     name="contactReason"
                                     value={reason}
                                     onChange={handleReasonChange}
@@ -154,7 +154,7 @@ function Contact() {
                     <div className="absolute bottom-[12%] text-center">
                         <p className="text-3xl font-semibold tracking-[0.55em] text-white/80">DAVIS MARKETING</p>
                         <p className="text-xl font-semibold tracking-[0.55em] text-white/80">DESARROLLO & PRODUCCIÓN</p>
-                        <p className="mt-5 text-lg font-light tracking-[0.35em] text-white/55">
+                        <p className="mt-5 text-lg font-light tracking-[0.35em] text-white/90">
                             Ideas que se <span className="text-[#AAC551]">mueven contigo.</span>
                         </p>
                     </div>
