@@ -63,7 +63,7 @@ function CreativeBridge() {
     <section
       ref={sectionRef}
       aria-labelledby="creative-bridge-title"
-      className={`creative-bridge relative isolate min-h-screen overflow-hidden bg-black px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24 ${isVisible ? "creative-bridge-visible" : ""}`}
+      className={`creative-bridge relative isolate min-h-screen overflow-hidden bg-transparent px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24 ${isVisible ? "creative-bridge-visible" : ""}`}
     >
       <div aria-hidden="true" className="creative-bridge-grid absolute inset-0 -z-20" />
       <div aria-hidden="true" className="absolute left-[8%] top-[18%] -z-10 h-48 w-48 rounded-full bg-[#AAC551]/10 blur-[100px]" />
@@ -126,9 +126,7 @@ function CreativeBridge() {
         </div>
 
         <div className="creative-bridge-footer mt-10 flex flex-col gap-6 border-t border-white/12 pt-6 sm:flex-row sm:items-center sm:justify-between lg:mt-0">
-          <p className="max-w-md text-sm leading-6 text-white/45">
-            Cada movimiento tiene una intención. Cada idea, una dirección.
-          </p>
+
           <a
             href="#proyectos"
             className="group inline-flex w-fit items-center gap-3 text-sm font-bold tracking-[0.14em] text-[#AAC551] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#AAC551]"

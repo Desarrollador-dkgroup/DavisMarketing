@@ -41,7 +41,7 @@ function Proyects() {
         <section
             id="proyectos"
             aria-labelledby="projects-title"
-            className="relative isolate min-h-screen scroll-mt-[-90px] overflow-hidden bg-black px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
+            className="relative isolate min-h-screen scroll-mt-[-90px] overflow-hidden bg-transparent px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
         >
             <div aria-hidden="true" className="projects-grid absolute inset-0 -z-10" />
             <div aria-hidden="true" className="absolute -right-24 top-24 -z-10 h-72 w-72 rounded-full bg-[#1C3D72]/20 blur-[120px]" />

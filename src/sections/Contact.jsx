@@ -30,7 +30,7 @@ function Contact() {
         <section
             id="contacto"
             aria-labelledby="contact-title"
-            className="relative isolate min-h-screen scroll-mt-[-90px] overflow-hidden bg-black px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
+            className="relative isolate min-h-screen scroll-mt-[-90px] overflow-hidden bg-transparent px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
         >
             <div aria-hidden="true" className="contact-grid absolute inset-0 -z-10" />
             <div aria-hidden="true" className="absolute -left-20 bottom-0 -z-10 h-64 w-64 rounded-full bg-[#AAC551]/10 blur-[110px]" />

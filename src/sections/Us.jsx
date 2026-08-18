@@ -36,7 +36,7 @@ function Us() {
     <section
       id="nosotros"
       aria-labelledby="nosotros-title"
-      className="relative scroll-mt-[-90px] isolate min-h-screen scroll-mt-16 overflow-hidden bg-black px-6 py-28 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
+      className="relative scroll-mt-[-90px] isolate min-h-screen scroll-mt-16 overflow-hidden bg-transparent px-6 py-28 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
     >
       <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-60">
         <div className="absolute left-[6%] top-20 h-44 w-44 rounded-full bg-[#1C3D72]/20 blur-[90px]" />
