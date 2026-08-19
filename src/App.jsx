@@ -13,13 +13,13 @@ function App() {
     <main className="relative min-h-screen">
       {/* Video de fondo ultra-fluido que reproduce en reversa continua (de endTime a startTime) */}
       <BackgroundVideo
-        src="/video2_smooth.mp4" // Video optimizado para retroceso continuo a 60fps sin cortes
+        src="/video2_smooth.webm"// Video optimizado para retroceso continuo a 60fps sin cortes
         height="113vh"           // Alto del video
-        speed={1}                // Velocidad del video
-        startTime={0.35}          // Segundo exacto donde termina de retroceder
-        endTime={7.8}            // Segundo exacto donde inicia el retroceso
+        speed={2}              // Velocidad del video
+        startTime={0}            // Segundo exacto donde termina de retroceder
+        endTime={5.5}            // Segundo exacto donde inicia el retroceso
         easeDuration={0}         // 0 = Velocidad 100% constante (sin ralentizar al inicio ni al final)
-        mode="reverse"           // "reverse" (solo hacia atrás) | "boomerang" (ida y vuelta) | "forward" (hacia adelante)
+        mode="forward"           // "reverse" (solo hacia atrás) | "boomerang" (ida y vuelta) | "forward" (hacia adelante)
         opacity={1}              // Opacidad
       />
 
