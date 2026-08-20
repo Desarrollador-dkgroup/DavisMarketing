@@ -151,10 +151,10 @@ function Contact() {
                         shadow-[0_18px_35px_rgba(0,0,0,0.65)]" />
                     </div>
 
-                    <div className="absolute bottom-[12%] text-center">
-                        <p className="text-3xl font-semibold tracking-[0.55em] text-white/80">DAVIS MARKETING</p>
-                        <p className="text-xl font-semibold tracking-[0.55em] text-white/80">DESARROLLO & PRODUCCIÓN</p>
-                        <p className="mt-5 text-lg font-light tracking-[0.35em] text-white/90">
+                    <div className="absolute bottom-[12%] text-center ml-4">
+                        <p className="text-3xl font-semibold tracking-[0.75em] text-white/80">DAVIS MARKETING</p>
+                        <p className="text-xl font-semibold tracking-[0.65em] text-white/80">DESARROLLO & PRODUCCIÓN</p>
+                        <p className="mt-5 text-xl font-light tracking-[0.35em] text-white/90">
                             Ideas que se <span className="text-[#AAC551]">mueven contigo.</span>
                         </p>
                     </div>

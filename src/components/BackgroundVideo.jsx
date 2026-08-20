@@ -89,6 +89,31 @@ function BackgroundVideo({
         } else {
           video.currentTime = nextTime;
         }
+      } else if (mode === "scroll") {
+        // --- MODO SCROLL (Reproduce según el scroll con suavizado) ---
+        if (!video.paused) {
+          video.pause();
+        }
+        
+        // 1. Obtenemos qué tanto se ha scrolleado la página (0 a 1)
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const scrollProgress = Math.max(0, Math.min(1, scrollY / maxScroll));
+        
+        // 2. Mapeamos ese progreso al tiempo del video
+        // Usamos 'speed' por si queremos que el video termine antes de llegar al final de la página
+        // (por ejemplo, speed=2 hará que el video llegue al final cuando vayas por la mitad de la página)
+        const timeRange = (targetEnd - startTime) * speed;
+        const targetTime = Math.min(targetEnd, startTime + (scrollProgress * timeRange));
+        
+        // 3. Suavizado (Lerp) para dar ese efecto de que se detiene lentamente
+        // Si no defines easeDuration en App.jsx, usamos 0.05 por defecto.
+        // Valores más bajos (ej. 0.01) lo hacen súper suave y tardado en detenerse.
+        // Valores más altos (ej. 0.2) lo hacen más reactivo y brusco.
+        const lerpFactor = easeDuration > 0 ? easeDuration : 0.05;
+        
+        video.currentTime += (targetTime - video.currentTime) * lerpFactor;
+
       } else if (mode === "forward") {
         // --- MODO SOLO AVANCE (FORWARD LOOP CON INICIO Y FIN) ---
         let currentSpeed = speed;

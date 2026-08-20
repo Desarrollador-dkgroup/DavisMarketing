@@ -63,7 +63,7 @@ function CreativeBridge() {
     <section
       ref={sectionRef}
       aria-labelledby="creative-bridge-title"
-      className={`creative-bridge relative isolate min-h-screen overflow-hidden bg-transparent px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24 ${isVisible ? "creative-bridge-visible" : ""}`}
+      className={` relative isolate min-h-screen overflow-hidden bg-transparent px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24 ${isVisible ? "creative-bridge-visible" : ""}`}
     >
       <div aria-hidden="true" className="creative-bridge-grid absolute inset-0 -z-20" />
       <div aria-hidden="true" className="absolute left-[8%] top-[18%] -z-10 h-48 w-48 rounded-full bg-[#AAC551]/10 blur-[100px]" />
@@ -107,7 +107,7 @@ function CreativeBridge() {
                   <span className="h-1.5 w-1.5 rounded-full bg-[#AAC551]/60" />
                   <span className="h-1.5 w-1.5 rounded-full bg-white/25" />
                 </div>
-                <span className="font-mono text-[10px] tracking-[0.2em] text-white/35">0{index + 1}</span>
+                <span className="font-sans text-[10px] tracking-[0.2em] text-white/35">0{index + 1}</span>
               </div>
 
               <div className="relative grid min-h-32 place-items-center">

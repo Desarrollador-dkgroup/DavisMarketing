@@ -250,7 +250,7 @@ body {
 }
 
 .creative-bridge::before,
-.creative-bridge::after {
+.creative-bridge::after{
   position: absolute;
   right: 4%;
   left: 4%;

@@ -13,11 +13,22 @@ function Navbar() {
     ];
 
     return (
-        <>
+        <div
+            className={`fixed left-0 top-0 z-50 w-full overflow-hidden
+            bg-black/15 backdrop-blur-lg text-white font-sans
+            transition-[height] duration-500 ease-in-out
+            ${
+                menuAbierto
+                    ? "h-[100dvh]"
+                    : "h-16"
+            }
+            md:h-16`}
+        >
             {/* Navbar */}
-            <nav className="fixed left-0 top-0 z-50 w-full 
-            text-white font-sans bg-black/20 backdrop-blur-md">
+            <nav className="relative z-10 w-full">
                 <div className="mx-auto flex h-16 items-center justify-between px-6">
+
+                    {/* Logo */}
                     <a href="#inicio" aria-label="Ir al inicio">
                         <img
                             src={LOGO}
@@ -33,7 +44,10 @@ function Navbar() {
                                 key={link.href}
                                 className="group transition-colors duration-300 hover:text-[#AAC551]"
                             >
-                                <a href={link.href} className="cursor-pointer">
+                                <a
+                                    href={link.href}
+                                    className="cursor-pointer"
+                                >
                                     {link.name}
                                 </a>
 
@@ -41,26 +55,41 @@ function Navbar() {
                             </div>
                         ))}
                     </div>
-                    
+
                     {/* Botón móvil */}
                     <button
                         type="button"
-                        aria-label={menuAbierto ? "Cerrar menú" : "Abrir menú"}
+                        aria-label={
+                            menuAbierto
+                                ? "Cerrar menú"
+                                : "Abrir menú"
+                        }
                         aria-expanded={menuAbierto}
-                        onClick={() => setMenuAbierto((estadoActual) => !estadoActual)}
-                        className="relative h-10 w-10 md:invisible"
+                        onClick={() =>
+                            setMenuAbierto(
+                                (estadoActual) => !estadoActual
+                            )
+                        }
+                        className="relative h-10 w-10 md:hidden"
                     >
                         <Menu
-                            className={`absolute inset-0 h-10 w-10 transition-all duration-300 ${menuAbierto
+                            className={`absolute inset-0 h-10 w-10
+                            transition-all duration-300
+                            ${
+                                menuAbierto
                                     ? "-rotate-90 opacity-0"
                                     : "rotate-0 opacity-100"
-                                }`}
+                            }`}
                         />
+
                         <X
-                            className={`absolute inset-0 h-10 w-10 transition-all duration-300 ${menuAbierto
+                            className={`absolute inset-0 h-10 w-10
+                            transition-all duration-300
+                            ${
+                                menuAbierto
                                     ? "rotate-0 opacity-100"
                                     : "rotate-90 opacity-0"
-                                }`}
+                            }`}
                         />
                     </button>
                 </div>
@@ -68,40 +97,41 @@ function Navbar() {
 
             {/* Menú móvil */}
             <div
-                className={`fixed left-0 top-16 z-40 w-full overflow-hidden md:hidden text-white ${menuAbierto
-                        ? "pointer-events-auto"
-                        : "pointer-events-none"
-                    }`}
+                className={`h-[calc(100dvh-64px)] md:hidden
+                transition-opacity duration-300
+                ${
+                    menuAbierto
+                        ? "pointer-events-auto opacity-100"
+                        : "pointer-events-none opacity-0"
+                }`}
             >
-                <div
-                    className={`h-[calc(100vh-64px)] origin-top bg-black/20 backdrop-blur-md transition-[transform,opacity] duration-500 ease-out ${menuAbierto
-                            ? "scale-y-100 opacity-100"
-                            : "scale-y-0 opacity-0"
-                        }`}
-                >
-                    <div className="flex flex-col gap-8 px-8 pt-12 text-2xl font-sans">
-                        {links.map((link, index) => (
-                            <a
-                                key={link.href}
-                                href={link.href}
-                                onClick={() => setMenuAbierto(false)}
-                                style={{
-                                    transitionDelay: menuAbierto
-                                        ? `${150 + index * 90}ms`
-                                        : "0ms",
-                                }}
-                                className={`cursor-pointer text-left transition-[transform,opacity,color] duration-400 hover:text-[#AAC551] ${menuAbierto
-                                        ? "translate-y-0 opacity-100"
-                                        : "-translate-y-3 opacity-0"
-                                    }`}
-                            >
-                                {link.name}
-                            </a>
-                        ))}
-                    </div>
+                <div className="flex flex-col gap-8 px-8 pt-12 text-2xl">
+                    {links.map((link, index) => (
+                        <a
+                            key={link.href}
+                            href={link.href}
+                            onClick={() => setMenuAbierto(false)}
+                            style={{
+                                transitionDelay: menuAbierto
+                                    ? `${150 + index * 90}ms`
+                                    : "0ms",
+                            }}
+                            className={`cursor-pointer text-left
+                            transition-[transform,opacity,color]
+                            duration-300
+                            hover:text-[#AAC551]
+                            ${
+                                menuAbierto
+                                    ? "translate-y-0 opacity-100"
+                                    : "-translate-y-3 opacity-0"
+                            }`}
+                        >
+                            {link.name}
+                        </a>
+                    ))}
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 
