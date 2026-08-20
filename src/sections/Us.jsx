@@ -36,8 +36,8 @@ function Us() {
     <section
       id="nosotros"
       aria-labelledby="nosotros-title"
-      className="relative scroll-mt-[-90px] isolate min-h-screen scroll-mt-16 
-      overflow-hidden bg-transparent px-6 py-28 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
+      className="relative scroll-mt-[-90px] isolate min-h-[750px] scroll-mt-20 
+      overflow-hidden bg-[#F4F4F4] px-6 py-15 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
     >
       <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-60">
         <div className="absolute left-[6%] top-20 h-44 w-44 rounded-full bg-[#1C3D72]/20 blur-[90px]" />
@@ -53,14 +53,15 @@ function Us() {
               NUESTRA FORMA DE TRABAJAR
             </div>
 
-            <h2 id="nosotros-title" className="text-4xl font-bold leading-[1.08] tracking-tight sm:text-5xl xl:text-6xl">
+            <h2 id="nosotros-title" className="text-4xl font-bold leading-[1.08] tracking-tight 
+            sm:text-5xl xl:text-6xl text-black/90">
               No hacemos ruido
               <br />
               <span className="text-[#AAC551]">Creamos impacto</span>
             </h2>
 
-            <span aria-hidden="true" className="my-8 block h-px w-16 bg-[#AAC551]" />
-            <p className="text-base leading-8 text-white/90 sm:text-lg">
+            <span aria-hidden="true" className="my-8 block h-px w-16 bg-black/90" />
+            <p className="text-base leading-8 text-black/90 sm:text-lg">
               Diseñamos estrategias de marketing que convierten atención en conexión,
               y conexión en resultados para tu marca.
             </p>
@@ -68,40 +69,37 @@ function Us() {
             <div className="mt-10 flex flex-wrap gap-2 text-[11px] font-bold tracking-[0.16em]">
               {marketingStages.map((stage, index) => (
                 <div key={stage.name} className="flex items-center gap-2">
-                  <span className="rounded-full border border-white/80 px-3 py-2 text-white/80">
+                  <span className="rounded-full border border-black/90 px-3 py-2 text-black/90">
                     {stage.title.toUpperCase()}
                   </span>
-                  {index < marketingStages.length - 1 && <span aria-hidden="true" className="text-[#AAC551]">→</span>}
+                  {index < marketingStages.length - 1 && <span aria-hidden="true" className="text-black/90">→</span>}
                 </div>
               ))}
             </div>
           </div>
 
           <div className="marketing-board relative p-4  sm:p-7">
-            {/* <div className="mb-7 flex items-center justify-between border-b border-white/20 pb-5">
-              <div>
-                <p className="text-[20px] font-bold tracking-[0.22em] text-[#AAC551]">SISTEMA DAVIS</p>
-                <p className="mt-1 text-sm text-white">De una idea a una marca que avanza</p>
-              </div>
-            </div> */}
+            <div className=" flex items-center justify-between border-b border-white/20 pb-5">
+              <p className="text-[20px] font-bold  text-black/90">De una idea a una marca que avanza</p>
+            </div>
 
             <ol className="marketing-flow relative space-y-3">
               {marketingStages.map(({ number, name, title, description, Icon }, index) => (
                 <li
                   key={name}
                   className={`marketing-stage group relative z-10 ml-8 border border-white/15 bg-black/85 
-                    px-4 py-4 transition duration-500 hover:border-[#AAC551]/70 
+                    px-4 py-4 transition duration-500 hover:border-[#AAC551]/70 hover:scale-103 rounded-md
                     sm:ml-12 sm:px-5 ${index % 2 === 1 ? "sm:translate-x-7" : "sm:-translate-x-1"}`}
                   style={{ animationDelay: `${index * 130}ms` }}
                 >
                   <span className="absolute -left-10 top-1/2 grid h-7 w-7 -translate-y-1/2 place-items-center 
                   rounded-full border border-[#AAC551] bg-black text-[10px] font-bold text-[#AAC551] 
-                  sm:-left-12 sm:h-8 sm:w-8">
+                  sm:-left-12 sm:h-8 sm:w-8 ">
                     {number}
                   </span>
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-4 ">
                     <div className="grid h-11 w-11 shrink-0 place-items-center border border-[#1C3D72] bg-[#1C3D72]/20 
-                    text-[#AAC551] transition group-hover:bg-[#AAC551] group-hover:text-black">
+                    text-[#AAC551] transition group-hover:bg-[#AAC551] group-hover:text-black rounded">
                       <Icon aria-hidden="true" className="h-5 w-5" strokeWidth={1.6} />
                     </div>
                     <div className="min-w-0">
@@ -119,11 +117,7 @@ function Us() {
         </div>
       </div>
 
-      <div aria-hidden="true" className="pointer-events-none absolute -bottom-[0.11em] left-1/2 -z-0 
-      -translate-x-1/2 whitespace-nowrap text-[23vw] font-extrabold leading-none 
-      tracking-[-0.07em] text-transparent opacity-100 [-webkit-text-stroke:1px_#AAC551]">
-        MARKETING
-      </div>
+      
     </section>
   );
 }

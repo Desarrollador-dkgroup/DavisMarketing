@@ -50,8 +50,8 @@ function CreativeBridge() {
     const horizontalPosition = (event.clientX - bounds.left) / bounds.width - 0.5;
     const verticalPosition = (event.clientY - bounds.top) / bounds.height - 0.5;
 
-    stageRef.current.style.setProperty("--bridge-tilt-x", `${verticalPosition * -7}deg`);
-    stageRef.current.style.setProperty("--bridge-tilt-y", `${horizontalPosition * 9}deg`);
+    stageRef.current.style.setProperty("--bridge-tilt-x", `${verticalPosition * -10}deg`);
+    stageRef.current.style.setProperty("--bridge-tilt-y", `${horizontalPosition * 12}deg`);
   };
 
   const resetPointerTilt = () => {
@@ -63,18 +63,13 @@ function CreativeBridge() {
     <section
       ref={sectionRef}
       aria-labelledby="creative-bridge-title"
-      className={` relative isolate min-h-screen overflow-hidden bg-transparent px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24 ${isVisible ? "creative-bridge-visible" : ""}`}
+      className={` relative isolate min-h-screen overflow-hidden px-6 py-24 font-sans text-white sm:px-10 lg:px-16 xl:px-24 bg-black ${isVisible ? "creative-bridge-visible" : ""}`}
     >
       <div aria-hidden="true" className="creative-bridge-grid absolute inset-0 -z-20" />
       <div aria-hidden="true" className="absolute left-[8%] top-[18%] -z-10 h-48 w-48 rounded-full bg-[#AAC551]/10 blur-[100px]" />
       <div aria-hidden="true" className="absolute bottom-[15%] right-[9%] -z-10 h-56 w-56 rounded-full bg-[#1C3D72]/25 blur-[110px]" />
 
       <div className="relative mx-auto max-w-[1440px]">
-        <div className="creative-bridge-eyebrow inline-flex items-center gap-3 border border-[#AAC551]/45 px-4 py-2 text-[11px] font-bold tracking-[0.28em] text-[#AAC551] sm:text-xs">
-          <Waypoints aria-hidden="true" className="h-4 w-4" strokeWidth={1.7} />
-          IMPULSAMOS MARCAS
-        </div>
-
         <h2
           id="creative-bridge-title"
           className="creative-bridge-title pointer-events-none mt-6 text-[16vw] font-extrabold leading-[0.72] tracking-[-0.075em] sm:text-[14vw] lg:text-[10.7rem] xl:text-[12rem]"
@@ -98,42 +93,32 @@ function CreativeBridge() {
           {creativeCards.map(({ name, caption, Icon, rotation, position }, index) => (
             <article
               key={name}
-              className={`creative-card ${position} relative z-10 min-h-52 overflow-hidden border border-white/25 bg-[#070808]/95 p-5 shadow-[0_26px_70px_rgba(0,0,0,0.75)] backdrop-blur-md lg:absolute lg:w-[31%] lg:min-h-64 ${index === 1 ? "creative-card-blue" : ""}`}
+              className={`creative-card ${position} bg-white/90 relative z-10 min-h-30 overflow-hidden border border-white/25 bg-[#070808]/95 p-5 
+              shadow-[0_10px_70px_rgba(0,0,0,1)] backdrop-blur-md lg:absolute lg:w-[31%] lg:min-h-30 ${index === 1 ? "creative-card-blue" : ""}`}
               style={{ "--creative-card-rotation": rotation, animationDelay: `${index * 140}ms` }}
             >
-              <div className="flex items-center justify-between border-b border-white/12 pb-4">
+              <div className="flex items-center justify-between border-b border-white/12 pb-4 ">
                 <div className="flex gap-1.5" aria-hidden="true">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#AAC551]" />
                   <span className="h-1.5 w-1.5 rounded-full bg-[#AAC551]/60" />
                   <span className="h-1.5 w-1.5 rounded-full bg-white/25" />
                 </div>
-                <span className="font-sans text-[10px] tracking-[0.2em] text-white/35">0{index + 1}</span>
+                <span className="font-sans text-[10px] tracking-[0.2em] text-black/50">0{index + 1}</span>
               </div>
 
-              <div className="relative grid min-h-32 place-items-center">
-                <div aria-hidden="true" className="creative-card-orbit absolute h-28 w-28 rounded-full border border-[#AAC551]/50" />
-                <div className="relative grid h-14 w-14 place-items-center border border-[#AAC551]/70 bg-[#AAC551]/10 text-[#AAC551]">
-                  <Icon aria-hidden="true" className="h-7 w-7" strokeWidth={1.5} />
+              <div className="relative grid min-h-32 place-items-center ">
+                <div aria-hidden="true" className="creative-card-orbit absolute h-33 w-33 rounded-full border border-[#AAC551]/50" />
+                <div className="relative grid h-20 w-20 place-items-center border border-[#AAC551]/70 bg-[#AAC551]/10 text-[#AAC551]">
+                  <Icon aria-hidden="true" className="h-10 w-100" strokeWidth={1.5} />
                 </div>
               </div>
 
               <div className="flex items-end justify-between gap-4">
-                <h3 className="text-2xl font-extrabold tracking-tight sm:text-3xl">{name}</h3>
-                <p className="max-w-24 text-right text-[10px] font-semibold uppercase tracking-[0.12em] text-white/45">{caption}</p>
+                <h3 className="text-2xl font-extrabold tracking-tight sm:text-3xl text-black/90">{name}</h3>
+                <p className="max-w-24 text-right text-[13px] font-semibold uppercase tracking-[0.12em] text-black/80">{caption}</p>
               </div>
             </article>
           ))}
-        </div>
-
-        <div className="creative-bridge-footer mt-10 flex flex-col gap-6 pt-6 sm:flex-row sm:items-center sm:justify-between lg:mt-0">
-
-          <a
-            href="#proyectos"
-            className="group inline-flex w-fit items-center gap-3 text-sm font-bold tracking-[0.14em] text-[#AAC551] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#AAC551]"
-          >
-            VER PROYECTOS
-            <ArrowDownRight aria-hidden="true" className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 group-hover:translate-y-1" />
-          </a>
         </div>
       </div>
     </section>
