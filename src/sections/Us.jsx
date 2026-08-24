@@ -37,7 +37,7 @@ function Us() {
       id="nosotros"
       aria-labelledby="nosotros-title"
       className="relative scroll-mt-[-90px] isolate min-h-[750px] scroll-mt-20 
-      overflow-hidden bg-[#F4F4F4] px-6 py-15 font-sans text-white sm:px-10 lg:px-16 xl:px-24"
+      overflow-hidden bg-[#F4F4F4] px-6 py-15 font-sans text-white sm:px-10 lg:px-16 xl:px-24 "
     >
       <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-60">
         <div className="absolute left-[6%] top-20 h-44 w-44 rounded-full bg-[#1C3D72]/20 blur-[90px]" />
@@ -45,7 +45,7 @@ function Us() {
         <div className="marketing-grid absolute inset-0" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-[1440px]">
+      <div className="relative z-10 mx-auto max-w-[1440px] mt-5">
         <div className="grid gap-16 lg:grid-cols-[0.78fr_1.22fr] lg:items-center lg:gap-20">
           <div className="max-w-xl">
             <div className="mb-5 flex items-center gap-3 text-sm font-semibold tracking-[0.18em] text-[#AAC551]">

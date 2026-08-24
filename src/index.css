@@ -481,7 +481,7 @@ body {
 
 .contact-logo-stage {
   animation: contact-mark-float 5s ease-in-out infinite;
-  filter: drop-shadow(0 28px 38px rgb(0 0 0 / 75%));
+  filter: drop-shadow(0 10px 10px rgb(0 0 0 / 30%));
   perspective: 900px;
 }
 

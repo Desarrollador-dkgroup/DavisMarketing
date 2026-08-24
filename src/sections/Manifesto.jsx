@@ -61,16 +61,16 @@ export default function Manifesto() {
   }, []);
 
   return (
-    <section className="relative min-h-screen bg-transparent py-15 px-6 sm:px-12 lg:px-24 overflow-hidden font-sans">
+    <section className="relative min-h-screen bg-white py-15 px-6 sm:px-12 lg:px-24 overflow-hidden font-sans mt-[-35px]">
       {/* Background gradients */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#AAC551]/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
       <div className="max-w-[1440px] mx-auto relative z-10">
         {/* Header Section */}
-        <div className="flex flex-col items-center justify-center mb-24 text-center">
-          <h2 className="text-5xl sm:text-7xl lg:text-[7rem] font-extrabold leading-[0.85] 
+        <div className="flex flex-col items-center justify-center mb-15 text-center mt-10">
+          <h2 className="text-4xl sm:text-5xl lg:text-[5rem] font-extrabold leading-[0.85] 
           tracking-tighter text-white uppercase group cursor-default">
-            <span className="block pt-4 text-transparent bg-clip-text bg-gradient-to-r 
-            from-white via-white/90 to-white/30 transition-all duration-500 group-hover:scale-[1.02]">
+            <span className="block pt-4 text-black/90 bg-clip-text bg-gradient-to-r 
+            from-white via-blck/90 to-black/30 transition-all duration-500 group-hover:scale-[1.02]">
               Diseñamos
             </span>
             <span className="block mt-2 italic font-sans text-[#AAC551] tracking-normal 
@@ -88,7 +88,7 @@ export default function Manifesto() {
           {PILLARS.map((pillar) => (
             <div
               key={pillar.id}
-              className="manifesto-card relative overflow-hidden bg-black/40 border border-white/10 rounded-3xl p-8 lg:p-12 transition-all duration-500 hover:border-white/30 hover:scale-[1.02] hover:-translate-y-2"
+              className="manifesto-card relative overflow-hidden bg-black/90 border border-white/10 rounded-3xl p-8 lg:p-12 transition-all duration-500 hover:border-white/30 hover:scale-[1.02] hover:-translate-y-2"
               style={{
                 boxShadow: `0 0 0 rgba(0,0,0,0)`,
               }}
