@@ -9,6 +9,8 @@ import {
     UserRound,
 } from "lucide-react";
 
+const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL;
+
 const fieldClass = `w-full rounded-lg border border-[#0B1730]/15 bg-white py-3.5 pl-12 pr-4
 text-sm text-[#0B1730] outline-none transition-all duration-300 placeholder:text-[#0B1730]/40
 hover:border-[#0B1730]/25 focus:border-[#AAC551] focus:shadow-[0_0_0_3px_rgba(170,197,81,0.12)]`;
@@ -20,11 +22,45 @@ function countWords(value) {
 
 function Contact() {
     const [reason, setReason] = useState("");
+    const [status, setStatus] = useState("idle");
     const wordCount = countWords(reason);
 
     const handleReasonChange = (event) => {
         const nextReason = event.target.value;
         if (countWords(nextReason) <= 300) setReason(nextReason);
+    };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (!APPS_SCRIPT_URL) {
+            setStatus("error");
+            return;
+        }
+
+        const formData = new FormData(event.currentTarget);
+        const payload = Object.fromEntries(formData.entries());
+
+        setStatus("sending");
+
+        try {
+            const response = await fetch(APPS_SCRIPT_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(payload),
+            });
+
+            if (response) {
+                event.currentTarget.reset();
+                setReason("");
+                setStatus("success");
+            }
+        } catch {
+            setStatus("error");
+        }
     };
 
     return (
@@ -84,7 +120,7 @@ function Contact() {
 
                     <form className="mt-9 rounded-2xl border border-[#0B1730]/10 bg-white/90
                     p-5 shadow-[0_20px_60px_rgba(11,23,48,0.08)] backdrop-blur-sm sm:p-7"
-                        onSubmit={(event) => event.preventDefault()}>
+                        onSubmit={handleSubmit}>
 
                         {/* Encabezado formulario */}
                         <div className="mb-5 flex items-center gap-3 border-b
@@ -278,6 +314,18 @@ function Contact() {
                                 className="h-5 w-5 transition-transform duration-300
                                 group-hover:translate-x-1" />
                         </button>
+
+                        {status === "success" && (
+                            <p className="mt-4 text-sm font-medium text-[#7F9D16]">
+                                Tu mensaje fue enviado correctamente.
+                            </p>
+                        )}
+
+                        {status === "error" && (
+                            <p className="mt-4 text-sm font-medium text-[#B45309]">
+                                No se pudo enviar el mensaje. Revisa la URL de Apps Script.
+                            </p>
+                        )}
 
                     </form>
 
