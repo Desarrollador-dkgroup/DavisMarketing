@@ -1,136 +1,220 @@
-import { useRef, useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Sparkles, Zap, Flame, Rocket } from "lucide-react";
 
 const PILLARS = [
-  {
-    id: "01",
-    title: "INNOVACIÓN",
-    subtitle: "Rompemos moldes",
-    desc: "No seguimos tendencias, las creamos. Tu marca merece estar a la vanguardia visual.",
-    Icon: Sparkles,
-    color: "from-[#AAC551] to-[#6b8129]",
-    shadow: "rgba(170, 197, 81, 0.4)",
-  },
-  {
-    id: "02",
-    title: "VELOCIDAD",
-    subtitle: "Impacto inmediato",
-    desc: "Capturamos la atención en los primeros 3 segundos. Diseños optimizados para la era del scroll.",
-    Icon: Zap,
-    color: "from-[#1C3D72] to-[#112444]",
-    shadow: "rgba(170, 197, 81, 0.4)",
-  },
-  {
-    id: "03",
-    title: "PASIÓN",
-    subtitle: "Energía creativa",
-    desc: "Cada pixel y cada frame están cargados de intención, fuerza y estrategia pura.",
-    Icon: Flame,
-    color: "from-[#FF4500] to-[#8b2500]",
-    shadow: "rgba(170, 197, 81, 0.4)",
-  },
-  {
-    id: "04",
-    title: "CONVERSIÓN",
-    subtitle: "Resultados reales",
-    desc: "No solo creamos arte visual, construimos motores estéticos que generan ventas reales.",
-    Icon: Rocket,
-    color: "from-[#9D4EDD] to-[#4c1d7a]",
-    shadow: "rgba(170, 197, 81, 0.4)",
-  },
+    {
+        id: "01",
+        title: "INNOVACIÓN",
+        subtitle: "ROMPEMOS MOLDES",
+        desc: "No seguimos tendencias, las creamos. Tu marca merece estar a la vanguardia visual.",
+        Icon: Sparkles,
+        accent: "#AAC551",
+    },
+    {
+        id: "02",
+        title: "VELOCIDAD",
+        subtitle: "IMPACTO INMEDIATO",
+        desc: "Capturamos la atención en los primeros 3 segundos. Diseños optimizados para la era del scroll.",
+        Icon: Zap,
+        accent: "#1C3D72",
+    },
+    {
+        id: "03",
+        title: "PASIÓN",
+        subtitle: "ENERGÍA CREATIVA",
+        desc: "Cada pixel y cada frame están cargados de intención, fuerza y estrategia pura.",
+        Icon: Flame,
+        accent: "#1C3D72",
+    },
+    {
+        id: "04",
+        title: "CONVERSIÓN",
+        subtitle: "RESULTADOS REALES",
+        desc: "No solo creamos arte visual, construimos motores estéticos que generan ventas reales.",
+        Icon: Rocket,
+        accent: "#AAC551",
+    },
 ];
 
 export default function Manifesto() {
-  const containerRef = useRef(null);
+    const containerRef = useRef(null);
 
-  useEffect(() => {
-    const handleMouseMove = (e) => {
-      if (!containerRef.current) return;
-      const cards = containerRef.current.querySelectorAll(".manifesto-card");
-      cards.forEach((card) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty("--mouse-x", `${x}px`);
-        card.style.setProperty("--mouse-y", `${y}px`);
-      });
-    };
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
+        const handleMouseMove = (e) => {
+            const rect = container.getBoundingClientRect();
+            container.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+            container.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+        };
 
-  return (
-    <section className="relative min-h-screen bg-white py-15 px-6 sm:px-12 lg:px-24 overflow-hidden font-sans mt-[-35px]">
-      {/* Background gradients */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#AAC551]/5 rounded-full blur-[120px] -z-10 pointer-events-none" />
-      <div className="max-w-[1440px] mx-auto relative z-10">
-        {/* Header Section */}
-        <div className="flex flex-col items-center justify-center mb-15 text-center mt-10">
-          <h2 className="text-4xl sm:text-5xl lg:text-[5rem] font-extrabold leading-[0.85] 
-          tracking-tighter text-white uppercase group cursor-default">
-            <span className="block pt-4 text-black/90 bg-clip-text bg-gradient-to-r 
-            from-white via-blck/90 to-black/30 transition-all duration-500 group-hover:scale-[1.02]">
-              Diseñamos
-            </span>
-            <span className="block mt-2 italic font-sans text-[#AAC551] tracking-normal 
-            transition-all duration-500 group-hover:-rotate-2 group-hover:scale-[1.05]">
-              el futuro
-            </span>
-          </h2>
-        </div>
+        container.addEventListener("mousemove", handleMouseMove);
+        return () => container.removeEventListener("mousemove", handleMouseMove);
+    }, []);
 
-        {/* Interactive Glowing Cards Grid */}
-        <div
-          ref={containerRef}
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 group/container"
-        >
-          {PILLARS.map((pillar) => (
-            <div
-              key={pillar.id}
-              className="manifesto-card relative overflow-hidden bg-black/90 border border-white/10 rounded-3xl p-8 lg:p-12 transition-all duration-500 hover:border-white/30 hover:scale-[1.02] hover:-translate-y-2"
-              style={{
-                boxShadow: `0 0 0 rgba(0,0,0,0)`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = `0 20px 60px ${pillar.shadow}`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = `0 0 0 rgba(0,0,0,0)`;
-              }}
-            >
+    return (
+        <section id="manifesto" className="relative isolate overflow-hidden bg-white px-6 py-24 font-sans sm:px-10 lg:px-16 xl:px-24">
+            <style>
+                {`
+                    @keyframes lineMove {
+                        0% { transform: translateX(-120%); }
+                        100% { transform: translateX(320%); }
+                    }
+                    @keyframes manifesto-float {
+                        0%, 100% { transform: translateY(0); }
+                        50% { transform: translateY(-6px); }
+                    }
+                `}
+            </style>
+            {/* Background */}
+            <div aria-hidden="true" className="absolute inset-0 -z-20 opacity-[0.45] bg-[linear-gradient(rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(0,0,0,0.035)_1px,transparent_1px)] bg-[size:80px_80px]" />
+            <div aria-hidden="true" className="absolute left-1/2 top-[42%] -z-10 h-[700px] w-[700px] -translate-x-1/2 rounded-full bg-[#AAC551]/10 blur-[160px]" />
+            <div className="mx-auto max-w-[1450px]">
+                {/* Title */}
+                <div className="mb-10 flex justify-center text-center">
+                    <h2 className="group cursor-default text-5xl font-black uppercase leading-[0.85] tracking-[-0.06em] sm:text-6xl lg:text-[5.4rem]">
 
-              <div
-                className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/container:opacity-100 pointer-events-none -z-10"
-                style={{
-                  background: `radial-gradient(600px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.06), transparent 40%)`
-                }}
-              />
+                        <span className="block text-black transition-transform duration-500 group-hover:scale-[1.02]">
+                            Diseñamos
+                        </span>
 
-              <div className="relative z-10 flex  h-full justify-between">
-                <div className="flex justify-between items-start mb-16 mr-5">
-                  <div className={`p-4 rounded-2xl bg-gradient-to-br ${pillar.color} shadow-lg`}>
-                    <pillar.Icon className="w-8 h-8 text-white" strokeWidth={2} />
-                  </div>
+                        <span className="mt-3 block italic tracking-[-0.03em] text-[#AAC551] transition-transform duration-500 group-hover:-rotate-2 group-hover:scale-[1.04]">
+                            el futuro
+                        </span>
+
+                    </h2>
                 </div>
 
-                <div>
-                  <h4 className="text-[#AAC551] font-sans text-sm tracking-widest uppercase mb-3">
-                    {pillar.subtitle}
-                  </h4>
-                  <h3 className="text-3xl lg:text-4xl font-extrabold text-white mb-4 uppercase tracking-tight">
-                    {pillar.title}
-                  </h3>
-                  <p className="text-white/60 text-lg leading-relaxed font-medium">
-                    {pillar.desc}
-                  </p>
+                {/* Board */}
+                <div ref={containerRef} className="group/board relative overflow-hidden bg-[#101010] shadow-[0_40px_100px_rgba(0,0,0,0.18)]"
+                    style={{ clipPath: "polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px)" }}>
+
+                    {/* Mouse glow */}
+                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/board:opacity-100"
+                        style={{ background: "radial-gradient(500px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.07), transparent 45%)" }}
+                    />
+
+                    {/* Board header */}
+                    <div className="relative z-20 flex items-center justify-center border-b border-white/10 px-8 py-5 sm:px-10">
+
+                        <div className="flex items-center gap-3 ">
+                            <span className="h-2 w-2 rounded-full bg-[#AAC551]" />
+
+                            <span className="text-[10px] font-semibold uppercase tracking-[0.35em] text-white/45 sm:text-xs">
+                                Davis Marketing
+                            </span>
+                        </div>
+
+                      
+
+                    </div>
+
+                    {/* Pillars */}
+                    <div className="relative z-10 grid md:grid-cols-2">
+
+                        {PILLARS.map((pillar, index) => {
+                            const Icon = pillar.Icon;
+
+                            return (
+                                <article
+                                    key={pillar.id}
+                                    className={`group/item relative min-h-[30px] overflow-hidden border-white/10 p-8 transition-all duration-500 sm:p-5 lg:h-[280px] lg:p-5 ${index === 0 ? "border-b md:border-r" : ""} ${index === 1 ? "border-b" : ""} ${index === 2 ? "border-b md:border-b-0 md:border-r" : ""}`}
+                                    style={{ "--accent": pillar.accent }}
+                                >
+
+                                    {/* Accent glow */}
+                                    <div
+                                        aria-hidden="true"
+                                        className="absolute -right-32 -top-32 h-[320px] w-[320px] scale-75 rounded-full opacity-0 blur-[100px] transition-all duration-700 group-hover/item:scale-110 group-hover/item:opacity-25"
+                                        style={{ backgroundColor: pillar.accent }}
+                                    />
+
+                                    {/* Left line */}
+                                    <span
+                                        className="absolute left-0 top-1/2 h-0 w-[3px] -translate-y-1/2 transition-all duration-500 group-hover/item:h-[55%]"
+                                        style={{ backgroundColor: pillar.accent, boxShadow: `0 0 25px ${pillar.accent}` }}
+                                    />
+
+                                    {/* Big number */}
+                                    <span
+                                        aria-hidden="true"
+                                        className="absolute -right-2 -top-8 select-none text-[10rem] font-black leading-none tracking-tighter text-white/[0.025] transition-all duration-700 group-hover/item:-translate-x-4 group-hover/item:translate-y-3 group-hover/item:text-white/[0.06] lg:text-[13rem]"
+                                    >
+                                        {pillar.id}
+                                    </span>
+
+                                    {/* Content */}
+                                    <div className="relative z-10 flex h-full flex-col">
+
+                                        <div className="flex items-start justify-between">
+
+                                            {/* Icon */}
+                                            <div
+                                                className="relative flex h-[68px] w-[68px] items-center justify-center overflow-hidden border border-white/10 bg-white/[0.04] transition-all duration-500 group-hover/item:border-transparent"
+                                                style={{ clipPath: "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)" }}
+                                            >
+                                                <div
+                                                    className="absolute inset-0 translate-y-full transition-transform duration-500 group-hover/item:translate-y-0"
+                                                    style={{ backgroundColor: pillar.accent }}
+                                                />
+
+                                                <Icon
+                                                    className="relative z-10 h-7 w-7 text-white transition-transform duration-500 group-hover/item:rotate-[-10deg] group-hover/item:scale-110"
+                                                    strokeWidth={1.8}
+                                                />
+                                            </div>
+                                        </div>
+                                        {/* Text */}
+                                        <div className="">
+                                            <h3 className="mb-4 text-3xl font-black uppercase tracking-[-0.04em] text-white transition-transform duration-500 group-hover/item:translate-x-1 sm:text-4xl">
+                                                {pillar.title}
+                                            </h3>
+                                            <p className="max-w-[460px] text-sm font-medium leading-7 text-white/45 transition-colors duration-500 group-hover/item:text-white/70 sm:text-base">
+                                                {pillar.desc}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {/* Bottom animated line */}
+                                    <div
+                                        className="absolute bottom-0 left-0 h-[2px] w-full scale-x-0 transition-transform duration-500 group-hover/item:scale-x-100"
+                                        style={{
+                                            background: `linear-gradient(90deg, transparent, ${pillar.accent}, transparent)`,
+                                            transformOrigin: "center",
+                                        }}
+                                    >
+                                        <span
+                                            className="absolute inset-y-0 left-0 w-[25%]"
+                                            style={{
+                                                background: "linear-gradient(90deg, transparent, white, transparent)",
+                                                animation: "lineMove 2.5s linear infinite",
+                                            }}
+                                        />
+                                    </div>
+
+                                </article>
+                            );
+                        })}
+
+                    </div>
                 </div>
-              </div>
+
+                {/* Bottom */}
+                <div className="mt-9 flex justify-center gap-6 sm:flex-row sm:items-center">
+
+                    <div
+                        className="flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
+                        style={{ animation: "manifesto-float 3s ease-in-out infinite" }}
+                    >
+                        <Zap className="h-5 w-5 fill-[#AAC551] text-[#AAC551]" strokeWidth={2} />
+                    </div>
+
+                    <p className="text-xs font-medium uppercase tracking-[0.23em] text-black/70 sm:text-sm">
+                        Ideas que impactan. Diseños que convierten.
+                    </p>
+
+                </div>
             </div>
-          ))}
-        </div>
-
-      </div>
-    </section >
-  );
+        </section>
+    );
 }

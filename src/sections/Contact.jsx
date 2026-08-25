@@ -361,7 +361,6 @@ function Contact() {
                                 text-[#0B1730] xl:text-3xl">
                                     DAVIS MARKETING
                                 </p>
-
                                 <p className="mt-1 text-base font-semibold tracking-[0.52em]
                                 text-[#0B1730]/75 xl:text-lg">
                                     DESARROLLO <span className="text-[#1C5DB2]">&</span> PRODUCCIÓN
