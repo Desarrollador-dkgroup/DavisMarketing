@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     ArrowRight,
     Building2,
@@ -21,13 +21,31 @@ function countWords(value) {
 }
 
 function Contact() {
+    const formRef = useRef(null);
+    const iframeRef = useRef(null);
     const [reason, setReason] = useState("");
     const [status, setStatus] = useState("idle");
+    const [submissionAttempted, setSubmissionAttempted] = useState(false);
     const wordCount = countWords(reason);
+
+    useEffect(() => {
+        const iframe = iframeRef.current;
+        if (!iframe) return;
+
+        const handleLoad = () => {
+            if (!submissionAttempted) return;
+            setStatus("success");
+            setSubmissionAttempted(false);
+        };
+
+        iframe.addEventListener("load", handleLoad);
+        return () => iframe.removeEventListener("load", handleLoad);
+    }, [submissionAttempted]);
 
     const handleReasonChange = (event) => {
         const nextReason = event.target.value;
         if (countWords(nextReason) <= 300) setReason(nextReason);
+        if (status !== "sending") setStatus("idle");
     };
 
     const handleSubmit = async (event) => {
@@ -38,29 +56,23 @@ function Contact() {
             return;
         }
 
-        const formData = new FormData(event.currentTarget);
-        const payload = Object.fromEntries(formData.entries());
-
         setStatus("sending");
+        setSubmissionAttempted(true);
 
-        try {
-            const response = await fetch(APPS_SCRIPT_URL, {
-                method: "POST",
-                mode: "no-cors",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(payload),
-            });
-
-            if (response) {
-                event.currentTarget.reset();
-                setReason("");
-                setStatus("success");
-            }
-        } catch {
+        const form = formRef.current;
+        if (!form) {
             setStatus("error");
+            setSubmissionAttempted(false);
+            return;
         }
+
+        form.action = APPS_SCRIPT_URL;
+        form.target = iframeRef.current?.name || "contact-submit-frame";
+        form.method = "POST";
+        form.submit();
+
+        event.currentTarget.reset();
+        setReason("");
     };
 
     return (
@@ -118,7 +130,7 @@ function Contact() {
                     {/* FORMULARIO */}
                     {/* ========================================= */}
 
-                    <form className="mt-9 rounded-2xl border border-[#0B1730]/10 bg-white/90
+                    <form ref={formRef} className="mt-9 rounded-2xl border border-[#0B1730]/10 bg-white/90
                     p-5 shadow-[0_20px_60px_rgba(11,23,48,0.08)] backdrop-blur-sm sm:p-7"
                         onSubmit={handleSubmit}>
 
@@ -299,21 +311,30 @@ function Contact() {
 
 
                         {/* Botón */}
-                        <button type="submit" className="group mt-6 flex w-full cursor-pointer
-                        items-center justify-center gap-3 rounded-lg bg-[#B4D643] px-6 py-4
+                        <button
+                            type="submit"
+                            disabled={status === "sending"}
+                            className="group mt-6 flex w-full cursor-pointer items-center justify-center gap-3 rounded-lg bg-[#B4D643] px-6 py-4
                         text-sm font-extrabold tracking-[0.08em] text-[#0B1730]
                         shadow-[0_10px_25px_rgba(170,197,81,0.25)] transition-all duration-300
                         hover:-translate-y-0.5 hover:bg-[#0B1730] hover:text-white
                         hover:shadow-[0_15px_30px_rgba(11,23,48,0.18)]
                         focus:outline-none focus-visible:ring-2 focus-visible:ring-[#AAC551]
-                        focus-visible:ring-offset-2 focus-visible:ring-offset-white">
+                        focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:opacity-75">
 
-                            ENVIAR MENSAJE
+                            {status === "sending" ? "ENVIANDO..." : "ENVIAR MENSAJE"}
 
-                            <ArrowRight aria-hidden="true"
-                                className="h-5 w-5 transition-transform duration-300
-                                group-hover:translate-x-1" />
+                            <ArrowRight
+                                aria-hidden="true"
+                                className={`h-5 w-5 transition-transform duration-300 ${status === "sending" ? "translate-x-0" : "group-hover:translate-x-1"}`}
+                            />
                         </button>
+
+                        {status === "sending" && (
+                            <p className="mt-4 text-sm font-medium text-[#1C3D72]">
+                                Enviando tu información...
+                            </p>
+                        )}
 
                         {status === "success" && (
                             <p className="mt-4 text-sm font-medium text-[#7F9D16]">
@@ -328,6 +349,13 @@ function Contact() {
                         )}
 
                     </form>
+
+                    <iframe
+                        ref={iframeRef}
+                        name="contact-submit-frame"
+                        title="contact-submit-frame"
+                        className="hidden"
+                    />
 
                 </div>
 

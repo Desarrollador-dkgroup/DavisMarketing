@@ -12,7 +12,7 @@ function PalaU() {
             
 
             <div className="grid min-h-[520px] lg:grid-cols-[0.78fr_1.22fr]">
-                <div className="relative z-10 flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-12 xl:px-16">
+                <div className="relative z-10 flex flex-col  px-6 py-10 sm:px-10 lg:px-12 xl:px-16">
                     <span aria-hidden="true" className="ml-1 text-md font-bold leading-none text-[#AAC551] sm:text-md">
                         EDUCACIÓN
                     </span>
@@ -40,13 +40,13 @@ function PalaU() {
                             </li>
                         ))}
                         </div>
-                        <div className="mt-15">
+                        {/* <div className="mt-15">
                             <a href="https://www.instagram.com/palaupty" target="blank" className="rounded-full bg-[#AAC551]/90 py-3 px-4 text-white 
                             hover:bg-transparent hover:border-2 hover:border-[#AAC551]/90 hover:text-white/90 border-2 border-[#AAC551]
                             transition-all duration-300">
                                 Visitar página
                             </a>
-                        </div>
+                        </div> */}
                     </ul>
     
                 </div>

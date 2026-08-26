@@ -12,7 +12,7 @@ function PanamaViajero() {
             
 
             <div className="grid min-h-[350px] lg:grid-cols-[0.78fr_1.22fr]">
-                <div className="relative z-10 flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-12 xl:px-16">
+                <div className="relative z-10 flex flex-col px-6 py-10 sm:px-10 lg:px-12 xl:px-16">
                     <span aria-hidden="true" className="ml-1 text-md font-bold leading-none text-[#AAC551] sm:text-md">
                         TURISMO DIGITAL
                     </span>
