@@ -66,9 +66,9 @@ function Us() {
               y conexión en resultados para tu marca.
             </p>
 
-            <div className="mt-10 flex flex-wrap gap-2 text-[11px] font-bold tracking-[0.16em]">
+            <div className="mt-10 flex flex-wrap  md:gap-2 text-[10px] md:text-[11px] font-bold tracking-[0.16em]">
               {marketingStages.map((stage, index) => (
-                <div key={stage.name} className="flex items-center gap-2">
+                <div key={stage.name} className="flex items-center md:gap-2">
                   <span className="rounded-full border border-black/90 px-3 py-2 text-black/90">
                     {stage.title.toUpperCase()}
                   </span>

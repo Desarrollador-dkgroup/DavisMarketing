@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Sparkles, Zap, Flame, Rocket } from "lucide-react";
 
 const PILLARS = [
@@ -38,10 +38,18 @@ const PILLARS = [
 
 export default function Manifesto() {
     const containerRef = useRef(null);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
 
     useEffect(() => {
+        const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
+        const updateTouchState = () => setIsTouchDevice(mediaQuery.matches);
+        updateTouchState();
+
         const container = containerRef.current;
-        if (!container) return;
+        if (!container) {
+            mediaQuery.addEventListener("change", updateTouchState);
+            return () => mediaQuery.removeEventListener("change", updateTouchState);
+        }
 
         const handleMouseMove = (e) => {
             const rect = container.getBoundingClientRect();
@@ -50,7 +58,12 @@ export default function Manifesto() {
         };
 
         container.addEventListener("mousemove", handleMouseMove);
-        return () => container.removeEventListener("mousemove", handleMouseMove);
+        mediaQuery.addEventListener("change", updateTouchState);
+
+        return () => {
+            container.removeEventListener("mousemove", handleMouseMove);
+            mediaQuery.removeEventListener("change", updateTouchState);
+        };
     }, []);
 
     return (
@@ -79,7 +92,7 @@ export default function Manifesto() {
                             Diseñamos
                         </span>
 
-                        <span className="mt-3 block italic tracking-[-0.03em] text-[#AAC551] transition-transform duration-500 group-hover:-rotate-2 group-hover:scale-[1.04]">
+                        <span className={`mt-3 block italic tracking-[-0.03em] text-[#AAC551] transition-transform duration-500 ${isTouchDevice ? "-rotate-2 scale-[1.04]" : "group-hover:-rotate-2 group-hover:scale-[1.04]"}`}>
                             el futuro
                         </span>
 
@@ -91,7 +104,7 @@ export default function Manifesto() {
                     style={{ clipPath: "polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px)" }}>
 
                     {/* Mouse glow */}
-                    <div aria-hidden="true" className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover/board:opacity-100"
+                    <div aria-hidden="true" className={`pointer-events-none absolute inset-0 transition-opacity duration-500 ${isTouchDevice ? "opacity-100" : "opacity-0 group-hover/board:opacity-100"}`}
                         style={{ background: "radial-gradient(500px circle at var(--mouse-x) var(--mouse-y), rgba(255,255,255,0.07), transparent 45%)" }}
                     />
 
@@ -126,20 +139,20 @@ export default function Manifesto() {
                                     {/* Accent glow */}
                                     <div
                                         aria-hidden="true"
-                                        className="absolute -right-32 -top-32 h-[320px] w-[320px] scale-75 rounded-full opacity-0 blur-[100px] transition-all duration-700 group-hover/item:scale-110 group-hover/item:opacity-25"
+                                        className={`absolute -right-32 -top-32 h-[320px] w-[320px] rounded-full blur-[100px] transition-all duration-700 ${isTouchDevice ? "scale-110 opacity-25" : "scale-75 opacity-0 group-hover/item:scale-110 group-hover/item:opacity-25"}`}
                                         style={{ backgroundColor: pillar.accent }}
                                     />
 
                                     {/* Left line */}
                                     <span
-                                        className="absolute left-0 top-1/2 h-0 w-[3px] -translate-y-1/2 transition-all duration-500 group-hover/item:h-[55%]"
+                                        className={`absolute left-0 top-1/2 w-[3px] -translate-y-1/2 transition-all duration-500 ${isTouchDevice ? "h-[55%]" : "h-0 group-hover/item:h-[55%]"}`}
                                         style={{ backgroundColor: pillar.accent, boxShadow: `0 0 25px ${pillar.accent}` }}
                                     />
 
                                     {/* Big number */}
                                     <span
                                         aria-hidden="true"
-                                        className="absolute -right-2 -top-8 select-none text-[10rem] font-black leading-none tracking-tighter text-white/[0.025] transition-all duration-700 group-hover/item:-translate-x-4 group-hover/item:translate-y-3 group-hover/item:text-white/[0.06] lg:text-[13rem]"
+                                        className={`absolute -right-2 -top-8 select-none text-[10rem] font-black leading-none tracking-tighter text-white/[0.025] transition-all duration-700 lg:text-[13rem] ${isTouchDevice ? "-translate-x-4 translate-y-3 text-white/[0.06]" : "group-hover/item:-translate-x-4 group-hover/item:translate-y-3 group-hover/item:text-white/[0.06]"}`}
                                     >
                                         {pillar.id}
                                     </span>
@@ -151,33 +164,33 @@ export default function Manifesto() {
 
                                             {/* Icon */}
                                             <div
-                                                className="relative flex h-[68px] w-[68px] items-center justify-center overflow-hidden border border-white/10 bg-white/[0.04] transition-all duration-500 group-hover/item:border-transparent"
+                                                className={`relative flex h-[68px] w-[68px] items-center justify-center overflow-hidden border border-white/10 bg-white/[0.04] transition-all duration-500 ${isTouchDevice ? "border-transparent" : "group-hover/item:border-transparent"}`}
                                                 style={{ clipPath: "polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px)" }}
                                             >
                                                 <div
-                                                    className="absolute inset-0 translate-y-full transition-transform duration-500 group-hover/item:translate-y-0"
+                                                    className={`absolute inset-0 transition-transform duration-500 ${isTouchDevice ? "translate-y-0" : "translate-y-full group-hover/item:translate-y-0"}`}
                                                     style={{ backgroundColor: pillar.accent }}
                                                 />
 
                                                 <Icon
-                                                    className="relative z-10 h-7 w-7 text-white transition-transform duration-500 group-hover/item:rotate-[-10deg] group-hover/item:scale-110"
+                                                    className={`relative z-10 h-7 w-7 text-white transition-transform duration-500 ${isTouchDevice ? "rotate-[-10deg] scale-110" : "group-hover/item:rotate-[-10deg] group-hover/item:scale-110"}`}
                                                     strokeWidth={1.8}
                                                 />
                                             </div>
                                         </div>
                                         {/* Text */}
                                         <div className="">
-                                            <h3 className="mb-4 text-3xl font-black uppercase tracking-[-0.04em] text-white transition-transform duration-500 group-hover/item:translate-x-1 sm:text-4xl">
+                                            <h3 className={`mb-4 text-3xl font-black uppercase tracking-[-0.04em] text-white transition-transform duration-500 sm:text-4xl ${isTouchDevice ? "translate-x-1" : "group-hover/item:translate-x-1"}`}>
                                                 {pillar.title}
                                             </h3>
-                                            <p className="max-w-[460px] text-sm font-medium leading-7 text-white/45 transition-colors duration-500 group-hover/item:text-white/70 sm:text-base">
+                                            <p className={`max-w-[460px] text-sm font-medium leading-7 text-white/45 transition-colors duration-500 sm:text-base ${isTouchDevice ? "text-white/70" : "group-hover/item:text-white/70"}`}>
                                                 {pillar.desc}
                                             </p>
                                         </div>
                                     </div>
                                     {/* Bottom animated line */}
                                     <div
-                                        className="absolute bottom-0 left-0 h-[2px] w-full scale-x-0 transition-transform duration-500 group-hover/item:scale-x-100"
+                                        className={`absolute bottom-0 left-0 h-[2px] w-full transition-transform duration-500 ${isTouchDevice ? "scale-x-100" : "scale-x-0 group-hover/item:scale-x-100"}`}
                                         style={{
                                             background: `linear-gradient(90deg, transparent, ${pillar.accent}, transparent)`,
                                             transformOrigin: "center",
