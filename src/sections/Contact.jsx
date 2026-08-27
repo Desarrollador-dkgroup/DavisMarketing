@@ -331,19 +331,19 @@ function Contact() {
                         </button>
 
                         {status === "sending" && (
-                            <p className="mt-4 text-sm font-medium text-[#1C3D72]">
+                            <p className="mt-4 text-sm font-medium text-[#000000]">
                                 Enviando tu información...
                             </p>
                         )}
 
                         {status === "success" && (
-                            <p className="mt-4 text-sm font-medium text-[#7F9D16]">
+                            <p className="mt-4 text-md font-bold text-[#000000]">
                                 Tu mensaje fue enviado correctamente.
                             </p>
                         )}
 
                         {status === "error" && (
-                            <p className="mt-4 text-sm font-medium text-[#B45309]">
+                            <p className="mt-4 text-md font-bold text-[#000000]">
                                 No se pudo enviar el mensaje. Revisa la URL de Apps Script.
                             </p>
                         )}
@@ -356,83 +356,54 @@ function Contact() {
                         title="contact-submit-frame"
                         className="hidden"
                     />
-
                 </div>
-
-
                 {/* ========================================= */}
                 {/* COLUMNA DERECHA / LOGO */}
                 {/* ========================================= */}
-
                 <div className="relative hidden min-h-[720px] items-center justify-center lg:flex"
                     aria-hidden="true">
-
                     {/* Tarjeta */}
                     <div className="relative flex h-[650px] w-full max-w-[680px]
                     items-center justify-center overflow-hidden rounded-[34px]
                     border border-[#1C3D72]/20 bg-white/70
                     shadow-[0_25px_80px_rgba(11,23,48,0.08)] backdrop-blur-sm">
-
-
                         {/* Luz verde superior */}
                         <div className="absolute left-[20%] top-0 h-px w-[35%]
                         bg-gradient-to-r from-transparent via-[#AAC551] to-transparent" />
-
                         <div className="absolute left-[42%] top-0 h-24 w-px
                         bg-gradient-to-b from-[#AAC551] to-transparent" />
-
                         <span className="absolute left-[42%] top-0 h-3 w-3 -translate-x-1/2
                         -translate-y-1/2 rounded-full bg-[#C8EA50]
                         shadow-[0_0_20px_8px_rgba(200,234,80,0.45)]" />
-
-
                         {/* Luz azul derecha */}
                         <div className="absolute right-0 top-[20%] h-[40%] w-px
                         bg-gradient-to-b from-transparent via-[#1C3D72]/40 to-transparent" />
-
-
                         {/* Anillos */}
                         <div className="absolute h-[500px] w-[500px] rounded-full
                         border border-[#AAC551]/25" />
-
                         <div className="absolute h-[420px] w-[420px] rounded-full
                         border border-[#1C3D72]/25" />
-
                         <div className="absolute h-[340px] w-[340px] rounded-full
                         border border-[#0B1730]/10" />
-
-
                         {/* Puntos decorativos */}
                         <span className="absolute left-[8%] top-[23%] h-2 w-2 rounded-full
                         bg-[#3278D7] shadow-[0_0_12px_rgba(50,120,215,0.5)]" />
-
                         <span className="absolute right-[13%] top-[18%] h-2.5 w-2.5 rounded-full
                         bg-[#AAC551] shadow-[0_0_15px_rgba(170,197,81,0.5)]" />
-
                         <span className="absolute right-[8%] top-[48%] h-1.5 w-1.5 rounded-full
                         bg-[#AAC551]" />
-
                         <span className="absolute right-[8%] bottom-[27%] h-2 w-2 rounded-full
                         bg-[#3278D7]" />
-
-
                         {/* Logo */}
                         <div className="relative z-10 flex w-full flex-col items-center">
-
                             <div className="contact-logo-stage relative h-[300px] w-full max-w-[570px]">
-
                                 <div className="contact-mark contact-mark-letters absolute inset-0
                                 bg-[#B4D643]" />
-
                                 <span className="contact-logo-sphere absolute left-[42%] top-[15%]
                                 h-14 w-14 rounded-full bg-[#1C3D72]
                                 " />
-
                             </div>
-
-
                             <div className="-mt-3 text-center">
-
                                 <p className="text-2xl font-semibold tracking-[0.55em]
                                 text-[#0B1730] xl:text-3xl">
                                     DAVIS MARKETING
