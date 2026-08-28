@@ -23,6 +23,7 @@ function countWords(value) {
 function Contact() {
     const formRef = useRef(null);
     const iframeRef = useRef(null);
+    const successTimerRef = useRef(null);
     const [reason, setReason] = useState("");
     const [status, setStatus] = useState("idle");
     const [submissionAttempted, setSubmissionAttempted] = useState(false);
@@ -42,6 +43,18 @@ function Contact() {
         return () => iframe.removeEventListener("load", handleLoad);
     }, [submissionAttempted]);
 
+    useEffect(() => {
+        if (status !== "success") return undefined;
+
+        successTimerRef.current = window.setTimeout(() => {
+            setStatus("idle");
+        }, 5000);
+
+        return () => {
+            if (successTimerRef.current) window.clearTimeout(successTimerRef.current);
+        };
+    }, [status]);
+
     const handleReasonChange = (event) => {
         const nextReason = event.target.value;
         if (countWords(nextReason) <= 300) setReason(nextReason);
@@ -54,6 +67,10 @@ function Contact() {
         if (!APPS_SCRIPT_URL) {
             setStatus("error");
             return;
+        }
+
+        if (successTimerRef.current) {
+            window.clearTimeout(successTimerRef.current);
         }
 
         setStatus("sending");
@@ -330,24 +347,6 @@ function Contact() {
                             />
                         </button>
 
-                        {status === "sending" && (
-                            <p className="mt-4 text-sm font-medium text-[#000000]">
-                                Enviando tu información...
-                            </p>
-                        )}
-
-                        {status === "success" && (
-                            <p className="mt-4 text-md font-bold text-[#000000]">
-                                Tu mensaje fue enviado correctamente.
-                            </p>
-                        )}
-
-                        {status === "error" && (
-                            <p className="mt-4 text-md font-bold text-[#000000]">
-                                No se pudo enviar el mensaje. Revisa la URL de Apps Script.
-                            </p>
-                        )}
-
                     </form>
 
                     <iframe
@@ -356,17 +355,19 @@ function Contact() {
                         title="contact-submit-frame"
                         className="hidden"
                     />
+
+                    
                 </div>
                 {/* ========================================= */}
                 {/* COLUMNA DERECHA / LOGO */}
                 {/* ========================================= */}
-                <div className="relative hidden min-h-[720px] items-center justify-center lg:flex"
+                <div className="relative hidden min-h-[720px] items-start justify-center lg:flex lg:flex-col "
                     aria-hidden="true">
                     {/* Tarjeta */}
                     <div className="relative flex h-[650px] w-full max-w-[680px]
                     items-center justify-center overflow-hidden rounded-[34px]
                     border border-[#1C3D72]/20 bg-white/70
-                    shadow-[0_25px_80px_rgba(11,23,48,0.08)] backdrop-blur-sm">
+                    shadow-[0_25px_80px_rgba(11,23,48,0.08)] backdrop-blur-sm mt-25">
                         {/* Luz verde superior */}
                         <div className="absolute left-[20%] top-0 h-px w-[35%]
                         bg-gradient-to-r from-transparent via-[#AAC551] to-transparent" />
@@ -431,6 +432,7 @@ function Contact() {
                             </div>
 
                         </div>
+                        
                         {/* Esquina inferior */}
                         <div className="absolute bottom-0 right-0 h-px w-[30%]
                         bg-gradient-to-r from-transparent via-[#AAC551] to-transparent" />
@@ -439,6 +441,26 @@ function Contact() {
                         rounded-full bg-[#C8EA50]
                         shadow-[0_0_18px_7px_rgba(200,234,80,0.4)]" />
 
+                    </div>
+                    <div
+                        aria-live="polite"
+                        className={`mt-15 ml-[-50px] flex justify-start transition-all duration-300${
+                            status === "idle" ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100 translate-y-0"
+                        }`}
+                    >
+                        <div
+                            className={`max-w-[320px] rounded-xl border px-4 py-3 text-sm font-semibold shadow-[0_10px_30px_rgba(11,23,48,0.10)] backdrop-blur-sm ${
+                                status === "sending"
+                                    ? "border-[#1C3D72]/20 bg-[#1C3D72]/8 text-[#1C3D72]"
+                                    : status === "success"
+                                        ? "border-[#AAC551]/25 bg-[#AAC551]/12 text-[#6F8E11]"
+                                        : "border-[#B45309]/20 bg-[#B45309]/10 text-[#B45309]"
+                            }`}
+                        >
+                            {status === "sending" && "Enviando tu información..."}
+                            {status === "success" && "Tu mensaje fue enviado correctamente."}
+                            {status === "error" && "No se pudo enviar el mensaje."}
+                        </div>
                     </div>
 
                 </div>
