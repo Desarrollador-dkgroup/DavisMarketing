@@ -356,7 +356,26 @@ function Contact() {
                         className="hidden"
                     />
 
-                    
+                    <div
+                        aria-live="polite"
+                        className={`mt-4 flex justify-start transition-all duration-300 ${
+                            status === "idle" ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100 translate-y-0"
+                        }`}
+                    >
+                        <div
+                            className={`max-w-[320px] rounded-xl border px-4 py-3 text-sm font-semibold shadow-[0_10px_30px_rgba(11,23,48,0.10)] backdrop-blur-sm ${
+                                status === "sending"
+                                    ? "border-[#1C3D72]/20 bg-[#1C3D72]/8 text-[#1C3D72]"
+                                    : status === "success"
+                                        ? "border-[#AAC551]/25 bg-[#AAC551]/12 text-[#6F8E11]"
+                                        : "border-[#B45309]/20 bg-[#B45309]/10 text-[#B45309]"
+                            }`}
+                        >
+                            {status === "sending" && "Enviando tu información..."}
+                            {status === "success" && "Tu mensaje fue enviado correctamente."}
+                            {status === "error" && "No se pudo enviar el mensaje."}
+                        </div>
+                    </div>
                 </div>
                 {/* ========================================= */}
                 {/* COLUMNA DERECHA / LOGO */}
