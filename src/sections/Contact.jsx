@@ -251,7 +251,7 @@ function Contact() {
                                     required
                                 />
                             </label>
-
+                            
 
                             {/* Correo */}
                             <label className="relative block">
@@ -282,7 +282,7 @@ function Contact() {
 
                                     <MessageSquareText aria-hidden="true" strokeWidth={1.7}
                                         className="h-5 w-5 text-[#91B51E]" />
-
+                                        
                                     Razón de contacto
                                 </span>
 
