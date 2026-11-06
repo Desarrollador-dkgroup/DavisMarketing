@@ -12,6 +12,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
   scroll-padding-top: 4rem;
 }
 
@@ -113,13 +114,20 @@ body {
   opacity: 0;
   text-shadow: 0 7px 12px rgb(0 0 0 / 75%), 0 0 18px rgb(28 61 114 / 20%);
   transform-origin: center bottom;
-  animation: cinematic-brand-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 7.1s forwards;
 }
 
 .cinematic-brand-subtitle {
   opacity: 0;
   text-shadow: 0 5px 9px rgb(0 0 0 / 70%);
-  animation: cinematic-subtitle-reveal 0.85s ease 8.05s forwards;
+}
+
+/* La animación del subtítulo arranca cuando termina la pantalla de carga. */
+.hero-ready .cinematic-brand-subtitle {
+  animation: cinematic-subtitle-reveal 0.85s ease 7.6s forwards;
+}
+
+.hero-ready .cinematic-brand-name {
+  animation: cinematic-brand-reveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 7.1s forwards;
 }
 
 .cinematic-floor-glow {
@@ -494,6 +502,7 @@ body {
 }
 
 .contact-logo-sphere {
+  translate: var(--sphere-x, 0px) var(--sphere-y, 0px);
   animation: contact-sphere-float 5s ease-in-out infinite;
 }
 
@@ -674,6 +683,7 @@ body {
   .creative-card,
   .creative-signal::after,
   .contact-logo-stage,
+  .hero-scroll-cue,
   .contact-logo-sphere,
   .contact-ring,
   .project-enter-left,
@@ -692,4 +702,306 @@ body {
     transform: none;
     transition: none;
   }
+}
+/* ------------------------------------------------------------------ */
+/* Scroll suave (Lenis)                                                */
+/* ------------------------------------------------------------------ */
+html.lenis-active {
+  scroll-behavior: auto;
+}
+
+html.is-loading,
+html.is-loading body {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------------ */
+/* Pantalla de carga                                                   */
+/* ------------------------------------------------------------------ */
+.preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 45%, rgb(28 61 114 / 35%), transparent 55%),
+    #030405;
+}
+
+.preloader-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.preloader-bar {
+  position: relative;
+  width: 180px;
+  height: 2px;
+  margin-top: 28px;
+  overflow: hidden;
+  background: rgb(255 255 255 / 12%);
+}
+
+.preloader-bar span {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #1c3d72, #aac551);
+  transform-origin: left;
+  animation: preloader-fill 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes preloader-fill {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Cursor propio                                                       */
+/* ------------------------------------------------------------------ */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.cursor-dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 999px;
+  background: #aac551;
+}
+
+.cursor-ring {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin: -19px 0 0 -19px;
+  border: 1.5px solid rgb(170 197 81 / 80%);
+  border-radius: 999px;
+  mix-blend-mode: difference;
+  transition:
+    width 0.3s ease,
+    height 0.3s ease,
+    margin 0.3s ease,
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.cursor-ring[data-state="hover"] {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  background: rgb(170 197 81 / 25%);
+}
+
+.cursor-ring[data-state="label"] {
+  width: 92px;
+  height: 92px;
+  margin: -46px 0 0 -46px;
+  border-color: #aac551;
+  background: #aac551;
+  mix-blend-mode: normal;
+}
+
+.cursor-label {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #000;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.cursor-ring[data-state="label"] .cursor-label {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------------ */
+/* Textura de grano                                                    */
+/* ------------------------------------------------------------------ */
+.grain-overlay {
+  position: fixed;
+  inset: -50%;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.9s steps(4) infinite;
+}
+
+@keyframes grain-shift {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(-3%, 2%);
+  }
+
+  50% {
+    transform: translate(2%, -3%);
+  }
+
+  75% {
+    transform: translate(-2%, -1%);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Hero                                                                */
+/* ------------------------------------------------------------------ */
+.hero-scroll-cue {
+  animation: hero-cue-bob 2.2s ease-in-out infinite;
+}
+
+@keyframes hero-cue-bob {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 8px;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Nosotros: etapa activa                                              */
+/* ------------------------------------------------------------------ */
+.marketing-stage.is-active {
+  border-color: rgb(170 197 81 / 70%);
+  box-shadow: 0 0 40px rgb(170 197 81 / 18%);
+}
+
+.marketing-stage.is-active .stage-number {
+  background: #aac551;
+  color: #000;
+}
+
+.marketing-stage.is-active .stage-icon {
+  background: #aac551;
+  color: #000;
+}
+
+/* ------------------------------------------------------------------ */
+/* Manifiesto: tipografía cinética                                     */
+/* ------------------------------------------------------------------ */
+.kinetic-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgb(0 0 0 / 22%);
+}
+
+.kinetic-key {
+  --fill: 0%;
+  color: transparent;
+  -webkit-text-stroke: 1.5px #8daa2f;
+  background: linear-gradient(90deg, #aac551 var(--fill), transparent var(--fill));
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+/* ------------------------------------------------------------------ */
+/* Proyectos                                                           */
+/* ------------------------------------------------------------------ */
+.project-card-glow {
+  z-index: 1;
+  opacity: 0;
+  background: radial-gradient(
+    600px circle at var(--glow-x, 50%) var(--glow-y, 50%),
+    rgb(170 197 81 / 12%),
+    transparent 45%
+  );
+  transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-card-glow {
+  opacity: 1;
+}
+
+.contact-logo-tilt {
+  transform-style: preserve-3d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain-overlay {
+    animation: none;
+  }
+
+  .kinetic-key {
+    --fill: 100%;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Aparición al hacer scroll (revealOnScroll)                          */
+/* ------------------------------------------------------------------ */
+.reveal {
+  opacity: 0;
+  translate: 0 50px;
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    rotate 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-revealed {
+  opacity: 1;
+  translate: 0 0;
+  rotate: 0deg;
+}
+
+.us-title-line.reveal,
+.manifesto-char.reveal {
+  opacity: 1;
+  translate: 0 115%;
+  rotate: 6deg;
+}
+
+.us-title-line.reveal.is-revealed,
+.manifesto-char.reveal.is-revealed {
+  translate: 0 0;
+  rotate: 0deg;
+}
+
+/* Las letras de "¿Hablamos?" caen desde arriba con un rebote. */
+.contact-big-char.reveal {
+  translate: 0 -120%;
+  rotate: 18deg;
+  transition:
+    opacity 0.4s ease,
+    translate 1s cubic-bezier(0.34, 1.56, 0.64, 1),
+    rotate 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.contact-big-char.reveal:nth-child(even) {
+  rotate: -14deg;
+}
+
+.contact-big-char.reveal.is-revealed {
+  translate: 0 0;
+  rotate: 0deg;
 }

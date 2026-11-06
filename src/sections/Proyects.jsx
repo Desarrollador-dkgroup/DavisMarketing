@@ -1,166 +1,237 @@
-import { useState } from "react";
-import { ArrowRight, FolderOpen } from "lucide-react";
+import { useEffect, useRef } from "react";
+import { ArrowUpRight, MoveRight } from "lucide-react";
+import { projects } from "../data/projects";
+import { gsap, revealOnScroll, useFinePointer, useReducedMotion } from "../lib/motion";
 
-import PanamaViajero from "./proyects/PanamaViajero";
-import ExpoEducate from "./proyects/Expoeducate";
-import PalaU from "./proyects/PalaU";
+/** Tarjeta de proyecto: se inclina con el ratón y la imagen se mueve en profundidad. */
+function ProjectCard({ project, index, total, tilt }) {
+    const cardRef = useRef(null);
+    const { name, category, description, image, services, link, accent } = project;
 
-const projects = [
-    {
-        id: "panama-viajero",
-        name: "Panamá Viajero",
-        category: "Turismo digital",
-        Component: PanamaViajero,
-    },
-    {
-        id: "expo-educate",
-        name: "Expo Edúcate",
-        category: "Educación superior",
-        Component: ExpoEducate,
-    },
-    {
-        id: "pa-la-u",
-        name: "Pa' la U",
-        category: "Educación",
-        Component: PalaU,
-    },
-];
-
-function Proyects() {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const [direction, setDirection] = useState("right");
-    const [animationKey, setAnimationKey] = useState(0);
-
-    const selectProject = (nextIndex) => {
-        if (nextIndex === activeIndex) return;
-
-        setDirection(nextIndex < activeIndex ? "left" : "right");
-        setActiveIndex(nextIndex);
-        setAnimationKey((currentKey) => currentKey + 1);
+    const handleMove = (event) => {
+        const card = cardRef.current;
+        if (!tilt || !card) return;
+        const bounds = card.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+        gsap.to(card, { rotateY: x * 8, rotateX: y * -8, duration: 0.6, ease: "power3.out" });
+        gsap.to(card.querySelector(".project-image"), { x: x * 40, y: y * 30, duration: 0.6 });
+        card.style.setProperty("--glow-x", `${(x + 0.5) * 100}%`);
+        card.style.setProperty("--glow-y", `${(y + 0.5) * 100}%`);
     };
 
-    const activeProject = projects[activeIndex];
-    const ActiveProject = activeProject.Component;
+    const handleLeave = () => {
+        const card = cardRef.current;
+        if (!card) return;
+        gsap.to(card, { rotateY: 0, rotateX: 0, duration: 0.9, ease: "elastic.out(1, 0.5)" });
+        gsap.to(card.querySelector(".project-image"), { x: 0, y: 0, duration: 0.9 });
+    };
 
     return (
-        <section id="proyectos" aria-labelledby="projects-title" className="relative isolate min-h-screen
-        scroll-mt-[-90px] overflow-hidden bg-black px-6 py-24 font-sans text-white
-        sm:px-10 lg:px-16 xl:px-24">
+        <article
+            className="project-slide shrink-0 snap-center [perspective:1400px]
+            w-[86vw] sm:w-[78vw] lg:w-[min(1100px,72vw)]"
+        >
+            <div
+                ref={cardRef}
+                onPointerMove={handleMove}
+                onPointerLeave={handleLeave}
+                data-cursor={link ? "Ver" : undefined}
+                style={{ "--accent": accent }}
+                className="project-card group relative grid overflow-hidden rounded-[28px] border
+                border-white/12 bg-[#0B0D10] [transform-style:preserve-3d] lg:min-h-[560px]
+                lg:grid-cols-[0.85fr_1.15fr]"
+            >
+                <div aria-hidden="true" className="project-card-glow pointer-events-none absolute inset-0" />
+
+                <div className="relative z-10 flex flex-col p-7 sm:p-10 lg:p-12">
+                    <div className="flex items-center justify-between text-xs font-bold tracking-[0.2em]">
+                        <span className="text-[#AAC551]">{category.toUpperCase()}</span>
+                        <span className="text-white/35">
+                            {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+                        </span>
+                    </div>
+
+                    <h3 className="mt-6 text-4xl font-extrabold leading-[0.95] tracking-tight sm:text-5xl lg:text-6xl">
+                        {name}
+                    </h3>
+                    <span aria-hidden="true" className="mb-6 mt-5 h-0.5 w-20 bg-[#AAC551]
+                    transition-[width] duration-700 group-hover:w-40" />
+                    <p className="max-w-md text-sm leading-7 text-white/75 sm:text-base">{description}</p>
+
+                    <ul className="mt-6 flex flex-wrap gap-3" aria-label="Servicios desarrollados">
+                        {services.map(({ name: serviceName, Icon }) => (
+                            <li
+                                key={serviceName}
+                                className="flex items-center gap-2 rounded-full border border-[#AAC551]/55 px-4 py-2
+                                text-[11px] font-bold uppercase tracking-[0.08em] text-white/80"
+                            >
+                                <Icon aria-hidden="true" className="h-4 w-4 text-[#AAC551]" strokeWidth={1.6} />
+                                {serviceName}
+                            </li>
+                        ))}
+                    </ul>
+
+                    {link && (
+                        <a
+                            href={link.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-magnetic
+                            className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border-2 border-[#AAC551]
+                            bg-[#AAC551] px-5 py-3 text-sm font-bold text-black transition-colors duration-300
+                            hover:bg-transparent hover:text-white lg:mt-auto"
+                        >
+                            {link.label}
+                            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+                        </a>
+                    )}
+                </div>
+
+                <div className="project-visual relative flex min-h-[260px] items-center justify-center
+                overflow-hidden p-6 sm:min-h-[340px] sm:p-10 [transform:translateZ(40px)]">
+                    <span
+                        aria-hidden="true"
+                        className="absolute h-[70%] w-[70%] rounded-full opacity-30 blur-[90px]"
+                        style={{ backgroundColor: accent }}
+                    />
+                    <img
+                        src={image}
+                        alt={`Presentación visual del proyecto ${name}`}
+                        loading="lazy"
+                        className="project-image relative z-10 w-full max-w-[640px] object-contain
+                        drop-shadow-[0_24px_55px_rgba(0,0,0,0.65)] transition-[scale] duration-700
+                        group-hover:scale-[1.04]"
+                    />
+                </div>
+            </div>
+        </article>
+    );
+}
+
+function Proyects() {
+    const sectionRef = useRef(null);
+    const trackRef = useRef(null);
+    const reducedMotion = useReducedMotion();
+    const finePointer = useFinePointer();
+
+    useEffect(() => {
+        const section = sectionRef.current;
+        const track = trackRef.current;
+        if (!section || !track || reducedMotion) return undefined;
+
+        const context = gsap.context(() => {
+            const media = gsap.matchMedia();
+
+            // Escritorio: el scroll vertical mueve la galería en horizontal.
+            media.add("(min-width: 1024px)", () => {
+                const distance = () => track.scrollWidth - window.innerWidth;
+                const horizontal = gsap.to(track, {
+                    x: () => -distance(),
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top top",
+                        end: () => `+=${distance()}`,
+                        pin: true,
+                        scrub: 0.8,
+                        invalidateOnRefresh: true,
+                        anticipatePin: 1,
+                    },
+                });
+
+                gsap.to(".projects-progress", {
+                    scaleX: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: section,
+                        start: "top top",
+                        end: () => `+=${distance()}`,
+                        scrub: true,
+                    },
+                });
+
+                // Cada tarjeta crece un poco al llegar al centro.
+                gsap.utils.toArray(".project-slide", track).forEach((slide) => {
+                    gsap.fromTo(
+                        slide,
+                        { scale: 0.88, opacity: 0.5 },
+                        {
+                            scale: 1,
+                            opacity: 1,
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: slide,
+                                containerAnimation: horizontal,
+                                start: "left right",
+                                end: "center center",
+                                scrub: true,
+                            },
+                        },
+                    );
+                });
+            });
+
+            return revealOnScroll(".projects-heading > *", { trigger: section, start: "top 75%" });
+        }, section);
+
+        return () => context.revert();
+    }, [reducedMotion]);
+
+    return (
+        <section
+            ref={sectionRef}
+            id="proyectos"
+            aria-labelledby="projects-title"
+            className="relative isolate overflow-hidden bg-black py-24 font-sans text-white
+            lg:flex lg:h-screen lg:flex-col lg:justify-center lg:py-0"
+        >
             <div aria-hidden="true" className="absolute inset-0 -z-20
             bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)]
             bg-[size:72px_72px]" />
-            <div aria-hidden="true" className="absolute -right-24 top-24 -z-10 h-[450px] w-[450px] rounded-full bg-[#1C3D72]/20 blur-[140px]" />
-            <div aria-hidden="true" className="absolute -left-40 top-[400px] -z-10
-            h-[400px] w-[400px] rounded-full bg-[#AAC551]/10 blur-[160px]" />
-            <div className="mx-auto max-w-[1440px]">
-                <header className="max-w-[670px]">
-                    <p className="mb-3 flex items-center gap-3 text-xs font-bold tracking-[0.2em]
-                    text-[#AAC551] sm:text-sm">
+            <div aria-hidden="true" className="absolute -right-24 top-24 -z-10 h-[450px] w-[450px] rounded-full bg-[#1C3D72]/25 blur-[140px]" />
+            <div aria-hidden="true" className="absolute -left-40 bottom-0 -z-10 h-[400px] w-[400px] rounded-full bg-[#AAC551]/10 blur-[160px]" />
+
+            <div className="projects-heading mx-auto flex w-full max-w-[1440px] flex-wrap items-end
+            justify-between gap-6 px-6 sm:px-10 lg:px-16 xl:px-24">
+                <div>
+                    <p className="mb-3 flex items-center gap-3 text-xs font-bold tracking-[0.2em] text-[#AAC551] sm:text-sm">
                         <span aria-hidden="true" className="h-px w-10 bg-[#AAC551]" />
                         NUESTRO TRABAJO
                     </p>
-                    <div>
-                        <h2 id="projects-title" className="text-4xl font-bold leading-[1.05]
-                        tracking-tight sm:text-5xl lg:text-6xl xl:text-7xl">
-                            Proyectos que <br /> <span className="text-[#AAC551]">inspiran</span>
-                        </h2>
-                        <span aria-hidden="true" className="mb-6 mt-5 block h-[3px]
-                        w-20 bg-[#AAC551]" />
-                    </div>
-                    <p className="max-w-[620px] text-base leading-8 text-white/75
-                    sm:text-lg lg:text-xl">
-                        Diseñamos estrategias de marketing que convierten atención
-                        en conexión, y conexión en resultados para tu marca.
-                    </p>
-                </header>
-                {/* Selector de proyectos */}
-                <div className="mt-10">
-                    <div className="mb-5 flex items-center gap-3">
-                        <FolderOpen size={18} strokeWidth={1.8} className="text-[#AAC551]" />
-                        <span className="whitespace-nowrap text-xs font-bold uppercase
-                        tracking-[0.18em] text-[#AAC551] sm:text-sm">
-                            Conoce nuestros proyectos
-                        </span>
-                        <span aria-hidden="true" className="h-px w-full max-w-40
-                        bg-[#AAC551]/40" />
-                    </div>
-                    <nav aria-label="Seleccionar proyecto">
-                        <div className="grid max-w-8xl grid-cols-1 gap-4 sm:grid-cols-3">
-                            {projects.map((project, index) => {
-                                const isActive = index === activeIndex;
-                                return (
-                                    <button
-                                        key={project.id}
-                                        type="button"
-                                        aria-pressed={isActive}
-                                        onClick={() => selectProject(index)}
-                                        className={`group relative min-h-[100px] cursor-pointer overflow-hidden
-                                        rounded-[24px] border p-6 text-left transition-all duration-500
-                                        ${isActive
-                                            ? "border-[#AAC551] bg-[#AAC551]/10 shadow-[0_0_35px_rgba(170,197,81,0.08)]"
-                                            : "border-white/15 bg-white/[0.025] hover:-translate-y-1 hover:border-[#AAC551]/50 hover:bg-white/[0.05]"
-                                        }`}
-                                    >
-                                        <div aria-hidden="true" className={`pointer-events-none absolute
-                                        -left-20 -top-20 h-52 w-52 rounded-full blur-[70px]
-                                        transition-opacity duration-500
-                                        ${isActive
-                                            ? "bg-[#AAC551]/20 opacity-100"
-                                            : "bg-[#AAC551]/10 opacity-0 group-hover:opacity-100"
-                                        }`} />
-                                        {/* Textp */}
-                                        <div className="relative z-10 flex h-full items-start
-                                        justify-between gap-5">
-                                            <div>
-                                                <h3 className="max-w-[220px] text-xl font-bold
-                                                leading-tight text-white sm:text-2xl">
-                                                    {project.name}
-                                                </h3>
-                                                <p className={`mt-3 text-xs font-bold uppercase
-                                                tracking-[0.1em] transition-colors duration-300
-                                                ${isActive
-                                                    ? "text-[#AAC551]"
-                                                    : "text-white/45 group-hover:text-white/70"
-                                                }`}>
-                                                    {project.category}
-                                                </p>
-                                            </div>
-                                            {/* Flecha */}
-                                            <div className={`flex h-11 w-11 shrink-0 items-center
-                                            justify-center self-end rounded-full border
-                                            transition-all duration-300
-                                            ${isActive
-                                                ? "border-[#AAC551] bg-[#AAC551] text-black"
-                                                : "border-white/15 bg-white/5 text-white/60 group-hover:border-[#AAC551] group-hover:bg-[#AAC551] group-hover:text-black"
-                                            }`}>
-                                                <ArrowRight size={20} strokeWidth={2}
-                                                    className="transition-transform duration-300
-                                                    group-hover:translate-x-0.5"
-                                                />
-                                            </div>
-                                        </div>
-                                        <span aria-hidden="true" className={`absolute bottom-0
-                                        left-0 h-[3px] bg-[#AAC551] transition-all duration-500
-                                        ${isActive
-                                            ? "w-full"
-                                            : "w-0 group-hover:w-full"
-                                        }`} />
-                                    </button>
-                                );
-                            })}
-                        </div>
-                    </nav>
+                    <h2 id="projects-title" className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+                        Proyectos que <span className="text-[#AAC551]">inspiran</span>
+                    </h2>
                 </div>
-                <div
-                    key={`${activeProject.id}-${animationKey}`}
-                    className={`mt-10 ${direction === "left"
-                        ? "project-enter-left"
-                        : "project-enter-right"
-                    }`}
-                >
-                    <ActiveProject />
-                </div>
+                <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.2em] text-white/50">
+                    <span className="lg:hidden">DESLIZA</span>
+                    <span className="hidden lg:inline">SIGUE BAJANDO</span>
+                    <MoveRight className="h-4 w-4 text-[#AAC551]" aria-hidden="true" />
+                </p>
+            </div>
 
+            <div
+                className="mt-10 overflow-x-auto overscroll-x-contain [scrollbar-width:none] lg:mt-12
+                lg:overflow-visible [&::-webkit-scrollbar]:hidden snap-x snap-mandatory lg:snap-none"
+            >
+                <div
+                    ref={trackRef}
+                    className="flex w-max gap-5 px-6 sm:gap-8 sm:px-10 lg:gap-12 lg:px-[14vw]"
+                >
+                    {projects.map((project, index) => (
+                        <ProjectCard
+                            key={project.id}
+                            project={project}
+                            index={index}
+                            total={projects.length}
+                            tilt={finePointer && !reducedMotion}
+                        />
+                    ))}
+                </div>
+            </div>
+
+            <div aria-hidden="true" className="mx-auto mt-10 hidden h-px w-full max-w-[1440px] bg-white/10 lg:block">
+                <span className="projects-progress block h-full origin-left scale-x-0 bg-[#AAC551]" />
             </div>
         </section>
     );

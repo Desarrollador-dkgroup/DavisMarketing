@@ -1,5 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import { Sparkles, Zap, Flame, Rocket } from "lucide-react";
+import { gsap, revealOnScroll, useReducedMotion } from "../lib/motion";
+
+// Franjas de tipografía gigante; las palabras marcadas se rellenan al hacer scroll.
+const KINETIC_ROWS = [
+    [
+        { text: "Estrategia" },
+        { text: "Identidad", key: true },
+        { text: "Contenido" },
+        { text: "Campañas", key: true },
+    ],
+    [
+        { text: "Ideas", key: true },
+        { text: "que" },
+        { text: "se mueven", key: true },
+        { text: "contigo" },
+    ],
+];
 
 const PILLARS = [
     {
@@ -38,7 +55,52 @@ const PILLARS = [
 
 export default function Manifesto() {
     const containerRef = useRef(null);
+    const sectionRef = useRef(null);
+    const reducedMotion = useReducedMotion();
     const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+    useEffect(() => {
+        const section = sectionRef.current;
+        if (!section || reducedMotion) return undefined;
+
+        const context = gsap.context(() => {
+            // Las dos franjas se desplazan en sentidos opuestos según el scroll.
+            gsap.utils.toArray(".kinetic-row", section).forEach((row, index) => {
+                gsap.fromTo(
+                    row,
+                    { xPercent: index % 2 === 0 ? 0 : -30 },
+                    {
+                        xPercent: index % 2 === 0 ? -30 : 0,
+                        ease: "none",
+                        scrollTrigger: { trigger: row, start: "top bottom", end: "bottom top", scrub: 0.5 },
+                    },
+                );
+            });
+
+            // Las palabras clave pasan de contorno a relleno verde.
+            gsap.utils.toArray(".kinetic-key", section).forEach((word) => {
+                gsap.to(word, {
+                    "--fill": "100%",
+                    ease: "none",
+                    scrollTrigger: { trigger: word, start: "top 85%", end: "top 35%", scrub: true },
+                });
+            });
+
+            // Título: cada letra sube desde abajo.
+            const undoChars = revealOnScroll(".manifesto-char", { trigger: ".manifesto-title", stagger: 0.03 });
+
+            const undoPillars = revealOnScroll(".manifesto-pillar", {
+                trigger: ".manifesto-board",
+                stagger: 0.12,
+            });
+            return () => {
+                undoChars();
+                undoPillars();
+            };
+        }, section);
+
+        return () => context.revert();
+    }, [reducedMotion]);
 
     useEffect(() => {
         const mediaQuery = window.matchMedia("(hover: none), (pointer: coarse)");
@@ -67,7 +129,7 @@ export default function Manifesto() {
     }, []);
 
     return (
-        <section id="manifesto" className="relative isolate overflow-hidden bg-white px-6 py-24 font-sans sm:px-10 lg:px-16 xl:px-24">
+        <section ref={sectionRef} id="manifesto" className="relative isolate overflow-hidden bg-white px-6 py-24 font-sans sm:px-10 lg:px-16 xl:px-24">
             <style>
                 {`
                     @keyframes lineMove {
@@ -86,21 +148,44 @@ export default function Manifesto() {
             <div className="mx-auto max-w-[1450px]">
                 {/* Title */}
                 <div className="mb-10 flex justify-center text-center">
-                    <h2 className="group cursor-default text-5xl font-black uppercase leading-[0.85] tracking-[-0.06em] sm:text-6xl lg:text-[5.4rem]">
+                    <h2 className="manifesto-title group cursor-default text-5xl font-black uppercase leading-[0.85] tracking-[-0.06em] sm:text-6xl lg:text-[5.4rem]">
 
-                        <span className="block text-black transition-transform duration-500 group-hover:scale-[1.02]">
-                            Diseñamos
+                        <span className="block overflow-hidden text-black transition-transform duration-500 group-hover:scale-[1.02]">
+                            <SplitChars text="Diseñamos" />
                         </span>
 
                         <span className={`mt-3 block italic tracking-[-0.03em] text-[#AAC551] transition-transform duration-500 ${isTouchDevice ? "-rotate-2 scale-[1.04]" : "group-hover:-rotate-2 group-hover:scale-[1.04]"}`}>
-                            el futuro
+                            <span className="block overflow-hidden pr-3">
+                                <SplitChars text="el futuro" />
+                            </span>
                         </span>
 
                     </h2>
                 </div>
 
+                {/* Tipografía cinética */}
+                <div aria-hidden="true" className="relative left-1/2 mb-14 w-screen -translate-x-1/2 select-none overflow-hidden">
+                    {KINETIC_ROWS.map((row, rowIndex) => (
+                        <div
+                            key={rowIndex}
+                            className="kinetic-row flex w-max gap-[0.35em] whitespace-nowrap py-1 text-[17vw]
+                            font-black uppercase leading-[0.95] tracking-[-0.05em] lg:text-[11vw]"
+                        >
+                            {[...row, ...row, ...row].map((word, wordIndex) => (
+                                <span
+                                    key={wordIndex}
+                                    className={word.key ? "kinetic-key" : "kinetic-outline"}
+                                >
+                                    {word.text}
+                                    <span className="text-[#AAC551]"> ✦</span>
+                                </span>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+
                 {/* Board */}
-                <div ref={containerRef} className="group/board relative overflow-hidden bg-[#101010] shadow-[0_40px_100px_rgba(0,0,0,0.18)]"
+                <div ref={containerRef} className="manifesto-board group/board relative overflow-hidden bg-[#101010] shadow-[0_40px_100px_rgba(0,0,0,0.18)]"
                     style={{ clipPath: "polygon(30px 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%, 0 30px)" }}>
 
                     {/* Mouse glow */}
@@ -132,7 +217,7 @@ export default function Manifesto() {
                             return (
                                 <article
                                     key={pillar.id}
-                                    className={`group/item relative min-h-[30px] overflow-hidden border-white/10 p-8 transition-all duration-500 sm:p-5 lg:h-[280px] lg:p-5 ${index === 0 ? "border-b md:border-r" : ""} ${index === 1 ? "border-b" : ""} ${index === 2 ? "border-b md:border-b-0 md:border-r" : ""}`}
+                                    className={`manifesto-pillar group/item relative min-h-[30px] overflow-hidden border-white/10 p-8 transition-all duration-500 sm:p-5 lg:h-[280px] lg:p-5 ${index === 0 ? "border-b md:border-r" : ""} ${index === 1 ? "border-b" : ""} ${index === 2 ? "border-b md:border-b-0 md:border-r" : ""}`}
                                     style={{ "--accent": pillar.accent }}
                                 >
 
@@ -229,5 +314,18 @@ export default function Manifesto() {
                 </div>
             </div>
         </section>
+    );
+}
+
+/** Separa un texto en letras para animarlas una por una (el texto completo sigue accesible). */
+function SplitChars({ text }) {
+    return (
+        <span aria-label={text} className="inline-block">
+            {Array.from(text).map((char, index) => (
+                <span key={index} aria-hidden="true" className="manifesto-char inline-block whitespace-pre">
+                    {char}
+                </span>
+            ))}
+        </span>
     );
 }

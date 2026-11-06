@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowDownRight, BadgeCheck, Play, Target, Waypoints } from "lucide-react";
+import { BadgeCheck, Play, Target } from "lucide-react";
 
 const creativeCards = [
   {

@@ -8,8 +8,15 @@ import {
     TrendingUp,
     UserRound,
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+import { gsap, revealOnScroll, useFinePointer, useReducedMotion } from "../lib/motion";
 
 const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL;
+// Solo dígitos, con código de país (ej. 50760000000). Si no está definido, no se muestra el botón.
+const WHATSAPP_NUMBER = (import.meta.env.VITE_WHATSAPP_NUMBER ?? "").replace(/\D/g, "");
+const WHATSAPP_URL = WHATSAPP_NUMBER
+    ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola Davis Marketing, quiero hablar de un proyecto.")}`
+    : "";
 
 const fieldClass = `w-full rounded-lg border border-[#0B1730]/15 bg-white py-3.5 pl-12 pr-4
 text-sm text-[#0B1730] outline-none transition-all duration-300 placeholder:text-[#0B1730]/40
@@ -28,6 +35,72 @@ function Contact() {
     const [status, setStatus] = useState("idle");
     const [submissionAttempted, setSubmissionAttempted] = useState(false);
     const wordCount = countWords(reason);
+    const sectionRef = useRef(null);
+    const logoCardRef = useRef(null);
+    const reducedMotion = useReducedMotion();
+    const finePointer = useFinePointer();
+
+    useEffect(() => {
+        const section = sectionRef.current;
+        if (!section || reducedMotion) return undefined;
+
+        const context = gsap.context(() => {
+            // Titular gigante: las letras caen y rebotan al entrar la sección.
+            // (la caída usa CSS: .contact-big-char.reveal → .is-revealed)
+            const undoChars = revealOnScroll(".contact-big-char", { trigger: ".contact-big", start: "top 85%", stagger: 0.05 });
+            // Y se estira de lado a lado mientras se hace scroll.
+            gsap.fromTo(
+                ".contact-big",
+                { letterSpacing: "-0.08em" },
+                {
+                    letterSpacing: "0.02em",
+                    ease: "none",
+                    scrollTrigger: { trigger: ".contact-big", start: "top bottom", end: "bottom 30%", scrub: true },
+                },
+            );
+            return undoChars;
+        }, section);
+
+        return () => context.revert();
+    }, [reducedMotion]);
+
+    // Logo interactivo: la tarjeta gira en 3D y la esfera azul persigue al ratón.
+    const handleLogoMove = (event) => {
+        const card = logoCardRef.current;
+        if (!card || !finePointer || reducedMotion) return;
+        const bounds = card.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+        const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+        gsap.to(card.querySelector(".contact-logo-tilt"), {
+            rotateY: x * 26,
+            rotateX: y * -22,
+            duration: 0.6,
+            ease: "power3.out",
+        });
+        gsap.to(card.querySelector(".contact-logo-sphere"), {
+            "--sphere-x": `${x * 160}px`,
+            "--sphere-y": `${y * 120}px`,
+            duration: 0.9,
+            ease: "power3.out",
+        });
+    };
+
+    const handleLogoLeave = () => {
+        const card = logoCardRef.current;
+        if (!card) return;
+        gsap.to(card.querySelector(".contact-logo-tilt"), {
+            rotateY: 0,
+            rotateX: 0,
+            duration: 1.2,
+            ease: "elastic.out(1, 0.4)",
+        });
+        gsap.to(card.querySelector(".contact-logo-sphere"), {
+            "--sphere-x": "0px",
+            "--sphere-y": "0px",
+            duration: 1.4,
+            ease: "elastic.out(1, 0.35)",
+        });
+    };
 
     useEffect(() => {
         const iframe = iframeRef.current;
@@ -93,7 +166,7 @@ function Contact() {
     };
 
     return (
-        <section id="contacto" aria-labelledby="contact-title" className="relative isolate min-h-screen
+        <section ref={sectionRef} id="contacto" aria-labelledby="contact-title" className="relative isolate min-h-screen
         scroll-mt-[-90px] overflow-hidden bg-[#F9FAF8] px-6 py-24 font-sans text-[#0B1730]
         sm:px-10 lg:px-16 xl:px-24">
 
@@ -110,6 +183,22 @@ function Contact() {
             <div aria-hidden="true" className="absolute -right-40 top-20 -z-10
             h-[450px] w-[450px] rounded-full bg-[#1C3D72]/8 blur-[160px]" />
 
+
+            {/* Titular gigante */}
+            <p
+                aria-hidden="true"
+                className="contact-big mx-auto mb-16 max-w-[1440px] select-none whitespace-nowrap text-center
+                text-[12.5vw] font-black uppercase leading-[0.85] tracking-[-0.08em] text-[#0B1730] lg:text-[14vw]"
+            >
+                {Array.from("¿Hablamos?").map((char, index) => (
+                    <span
+                        key={index}
+                        className={`contact-big-char inline-block ${index === 0 || index === 9 ? "text-[#AAC551]" : ""}`}
+                    >
+                        {char}
+                    </span>
+                ))}
+            </p>
 
             <div className="mx-auto grid max-w-[1440px] gap-14
             lg:grid-cols-[0.92fr_1.08fr] lg:items-center xl:gap-24">
@@ -349,6 +438,21 @@ function Contact() {
 
                     </form>
 
+                    {WHATSAPP_URL && (
+                        <a
+                            href={WHATSAPP_URL}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            data-magnetic
+                            className="mt-4 flex w-full items-center justify-center gap-3 rounded-lg border-2
+                            border-[#25D366] px-6 py-3.5 text-sm font-extrabold tracking-[0.08em] text-[#128C4B]
+                            transition-colors duration-300 hover:bg-[#25D366] hover:text-white"
+                        >
+                            <FaWhatsapp className="h-5 w-5" aria-hidden="true" />
+                            ESCRÍBENOS POR WHATSAPP
+                        </a>
+                    )}
+
                     <iframe
                         ref={iframeRef}
                         name="contact-submit-frame"
@@ -383,7 +487,12 @@ function Contact() {
                 <div className="relative hidden min-h-[720px] items-start justify-center lg:flex lg:flex-col "
                     aria-hidden="true">
                     {/* Tarjeta */}
-                    <div className="relative flex h-[650px] w-full max-w-[680px]
+                    <div
+                        ref={logoCardRef}
+                        onPointerMove={handleLogoMove}
+                        onPointerLeave={handleLogoLeave}
+                        data-cursor="Juega"
+                        className="relative flex h-[650px] w-full max-w-[680px]
                     items-center justify-center overflow-hidden rounded-[34px]
                     border border-[#1C3D72]/20 bg-white/70
                     shadow-[0_25px_80px_rgba(11,23,48,0.08)] backdrop-blur-sm mt-25">
@@ -415,7 +524,7 @@ function Contact() {
                         <span className="absolute right-[8%] bottom-[27%] h-2 w-2 rounded-full
                         bg-[#3278D7]" />
                         {/* Logo */}
-                        <div className="relative z-10 flex w-full flex-col items-center">
+                        <div className="contact-logo-tilt relative z-10 flex w-full flex-col items-center">
                             <div className="contact-logo-stage relative h-[300px] w-full max-w-[570px]">
                                 <div className="contact-mark contact-mark-letters absolute inset-0
                                 bg-[#B4D643]" />

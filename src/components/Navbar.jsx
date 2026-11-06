@@ -46,7 +46,8 @@ function Navbar() {
                             >
                                 <a
                                     href={link.href}
-                                    className="cursor-pointer"
+                                    data-magnetic
+                                    className="inline-block cursor-pointer"
                                 >
                                     {link.name}
                                 </a>
