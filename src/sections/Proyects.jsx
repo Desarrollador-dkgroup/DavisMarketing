@@ -199,9 +199,7 @@ function Proyects() {
                         <span aria-hidden="true" className="h-px w-10 bg-[#AAC551]" />
                         NUESTRO TRABAJO
                     </p>
-                    <h2 id="projects-title" className="text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
-                        Proyectos que <span className="text-[#AAC551]">inspiran</span>
-                    </h2>
+                    <h2 id="projects-title" className="sr-only">Proyectos</h2>
                 </div>
                 <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.2em] text-white/50">
                     <span className="lg:hidden">DESLIZA</span>
