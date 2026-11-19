@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 
-const COLORS = ["#F4F4F4", "#F4F4F4", "#F4F4F4", "#AAC551", "#5C86C9"];
+// Solo blanco: las partículas toman el color del texto.
+const COLORS = ["#FFFFFF"];
 
 /**
  * Dibuja un texto con partículas sobre un canvas que cubre exactamente al elemento.
