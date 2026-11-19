@@ -5,11 +5,10 @@ import {
     Mail,
     MessageSquareText,
     Phone,
-    TrendingUp,
     UserRound,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import { gsap, revealOnScroll, useFinePointer, useReducedMotion } from "../lib/motion";
+import { gsap, useFinePointer, useReducedMotion } from "../lib/motion";
 
 const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL;
 // Solo dígitos, con código de país (ej. 50760000000). Si no está definido, no se muestra el botón.
@@ -40,29 +39,6 @@ function Contact() {
     const reducedMotion = useReducedMotion();
     const finePointer = useFinePointer();
 
-    useEffect(() => {
-        const section = sectionRef.current;
-        if (!section || reducedMotion) return undefined;
-
-        const context = gsap.context(() => {
-            // Titular gigante: las letras caen y rebotan al entrar la sección.
-            // (la caída usa CSS: .contact-big-char.reveal → .is-revealed)
-            const undoChars = revealOnScroll(".contact-big-char", { trigger: ".contact-big", start: "top 85%", stagger: 0.05 });
-            // Y se estira de lado a lado mientras se hace scroll.
-            gsap.fromTo(
-                ".contact-big",
-                { letterSpacing: "-0.08em" },
-                {
-                    letterSpacing: "0.02em",
-                    ease: "none",
-                    scrollTrigger: { trigger: ".contact-big", start: "top bottom", end: "bottom 30%", scrub: true },
-                },
-            );
-            return undoChars;
-        }, section);
-
-        return () => context.revert();
-    }, [reducedMotion]);
 
     // Logo interactivo: la tarjeta gira en 3D y la esfera azul persigue al ratón.
     const handleLogoMove = (event) => {
@@ -184,22 +160,6 @@ function Contact() {
             h-[450px] w-[450px] rounded-full bg-[#1C3D72]/8 blur-[160px]" />
 
 
-            {/* Titular gigante */}
-            <p
-                aria-hidden="true"
-                className="contact-big mx-auto mb-16 max-w-[1440px] select-none whitespace-nowrap text-center
-                text-[12.5vw] font-black uppercase leading-[0.85] tracking-[-0.08em] text-[#0B1730] lg:text-[14vw]"
-            >
-                {Array.from("¿Hablamos?").map((char, index) => (
-                    <span
-                        key={index}
-                        className={`contact-big-char inline-block ${index === 0 || index === 9 ? "text-[#AAC551]" : ""}`}
-                    >
-                        {char}
-                    </span>
-                ))}
-            </p>
-
             <div className="mx-auto grid max-w-[1440px] gap-14
             lg:grid-cols-[0.92fr_1.08fr] lg:items-center xl:gap-24">
 
@@ -208,16 +168,6 @@ function Contact() {
                 {/* ========================================= */}
 
                 <div>
-
-                    {/* Label */}
-                    <div className="mb-5 flex items-center gap-3 text-xs font-bold
-                    tracking-[0.18em] text-[#84A318] sm:text-sm">
-
-                        <span className="h-px w-11 bg-[#AAC551]" aria-hidden="true" />
-
-                        HABLEMOS DE TU PROYECTO
-                    </div>
-
 
                     {/* Título */}
                     <h2 id="contact-title" className="max-w-[620px] text-4xl font-bold
@@ -239,22 +189,6 @@ function Contact() {
                     <form ref={formRef} className="mt-9 rounded-2xl border border-[#0B1730]/10 bg-white/90
                     p-5 shadow-[0_20px_60px_rgba(11,23,48,0.08)] backdrop-blur-sm sm:p-7"
                         onSubmit={handleSubmit}>
-
-                        {/* Encabezado formulario */}
-                        <div className="mb-5 flex items-center gap-3 border-b
-                        border-[#0B1730]/10 pb-5">
-
-                            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full
-                            border border-[#AAC551] bg-[#AAC551]/5 text-[#8AAA1B]">
-
-                                <TrendingUp aria-hidden="true" className="h-5 w-5" />
-                            </span>
-
-                            <p className="text-base font-bold text-[#0B1730] sm:text-lg">
-                                ¡Elevemos tu marca al siguiente nivel!
-                            </p>
-                        </div>
-
 
                         <div className="space-y-3">
 
