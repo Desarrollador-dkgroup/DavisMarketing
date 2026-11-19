@@ -66,13 +66,16 @@ function HeroCinematic() {
           >
             DESARROLLO &amp; PRODUCCIÓN
           </span>
+          <span className="mt-8 block text-sm font-semibold uppercase tracking-[0.35em] text-[#AAC551] sm:text-base">
+            Proyecto en desarrollo
+          </span>
         </h1>
       </div>
 
       <a
-        href="#nosotros"
-        data-cursor="Bajar"
-        aria-label="Bajar a la siguiente sección"
+        href="#contacto"
+        data-cursor="Contactar"
+        aria-label="Bajar al formulario de contacto"
         className="hero-scroll-cue absolute bottom-8 left-1/2 z-20 grid h-12 w-12 -translate-x-1/2
         place-items-center rounded-full border border-white/30 text-white/80 backdrop-blur-sm
         transition-colors hover:border-[#AAC551] hover:text-[#AAC551]"

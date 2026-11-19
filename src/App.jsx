@@ -49,6 +49,18 @@ function useSectionCurtains() {
   }, [reducedMotion]);
 }
 
+/**
+ * Secciones visibles. Para mostrar una de nuevo, cámbiala a true.
+ * El código de las secciones ocultas se conserva en el repo.
+ */
+const SECCIONES = {
+  nosotros: false,
+  creativeBridge: false,
+  manifesto: false,
+  proyectos: false,
+  contacto: true,
+};
+
 function App() {
   useSectionCurtains();
 
@@ -73,11 +85,11 @@ function App() {
       {/* Sin backdrop-filter aquí: rompería las secciones fijadas con ScrollTrigger. */}
       <div className="relative z-0">
         <HERO_CINEMATIC />
-        <div data-curtain><US /></div>
-        <div data-curtain><CREATIVEBRIDGE /></div>
-        <div data-curtain><MANIFESTO /></div>
-        <div data-curtain><PROYECTS /></div>
-        <div data-curtain><CONTACT /></div>
+        {SECCIONES.nosotros && <div data-curtain><US /></div>}
+        {SECCIONES.creativeBridge && <div data-curtain><CREATIVEBRIDGE /></div>}
+        {SECCIONES.manifesto && <div data-curtain><MANIFESTO /></div>}
+        {SECCIONES.proyectos && <div data-curtain><PROYECTS /></div>}
+        {SECCIONES.contacto && <div data-curtain><CONTACT /></div>}
       </div>
     </main>
   );

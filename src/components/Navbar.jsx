@@ -7,8 +7,6 @@ function Navbar() {
 
     const links = [
         { name: "Inicio", href: "#inicio" },
-        { name: "Nosotros", href: "#nosotros" },
-        { name: "Proyectos", href: "#proyectos" },
         { name: "Contáctanos", href: "#contacto" },
     ];
 
