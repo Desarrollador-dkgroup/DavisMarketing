@@ -193,6 +193,17 @@ function Contact() {
                 ))}
             </p>
 
+            {/* Titular en dos líneas, por encima de las dos columnas */}
+            <h2
+                id="contact-title"
+                className="mx-auto mb-6 max-w-[1440px] text-3xl font-bold leading-[1.05]
+                tracking-tight text-[#0B1730] sm:text-4xl xl:text-5xl"
+            >
+                Sabemos lo importante que es
+                <br />
+                tu marca y que tenga un gran impacto
+            </h2>
+
             <div className="mx-auto grid max-w-[1440px] gap-14
             lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch xl:gap-24">
 
@@ -203,10 +214,6 @@ function Contact() {
                 <div className="relative">
 
                     {/* Título */}
-                    <h2 id="contact-title" className="max-w-[680px] text-3xl font-bold
-                    leading-[1.05] tracking-tight text-[#0B1730] sm:text-4xl xl:text-5xl">
-                        Sabemos lo importante que es tu marca y que tenga un gran impacto
-                    </h2>
 
 
                     {/* Descripción */}
@@ -460,7 +467,7 @@ function Contact() {
                         onPointerLeave={handleLogoLeave}
                         data-cursor="Juega"
                         className="relative flex min-h-[460px] w-full max-w-[680px] flex-1
-                    items-center justify-center overflow-hidden rounded-[34px]
+                    flex-col items-center justify-start pt-9 overflow-hidden rounded-[34px]
                     border border-[#1C3D72]/20 bg-white/70
                     shadow-[0_25px_80px_rgba(11,23,48,0.08)] backdrop-blur-sm">
                         {/* Luz verde superior */}
