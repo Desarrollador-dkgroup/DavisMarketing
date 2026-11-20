@@ -210,13 +210,12 @@ function CinematicLogo({ reducedMotion }) {
         <group position={[-4.9, 2.2, 0]} scale={[0.0118, -0.0118, 0.0118]}>
           {logoShapes.map(({ id, fillGeometry }, index) => (
             <mesh key={`fill-${id}`} geometry={fillGeometry} castShadow>
-              <meshStandardMaterial
+              <meshBasicMaterial
                 ref={(material) => { fillMaterials.current[index] = material; }}
                 color="#AAC551"
                 transparent
                 opacity={0}
-                roughness={0.38}
-                metalness={0}
+                toneMapped={false}
                 side={THREE.DoubleSide}
               />
             </mesh>
@@ -225,13 +224,12 @@ function CinematicLogo({ reducedMotion }) {
 
         <mesh position={[-0.4, 1.6, 0.22]}>
           <circleGeometry args={[0.49, 64]} />
-          <meshStandardMaterial
+          <meshBasicMaterial
             ref={sphereMaterialRef}
             color="#1C3D72"
             transparent
             opacity={0}
-            roughness={0.55}
-            metalness={0}
+            toneMapped={false}
             side={THREE.DoubleSide}
           />
         </mesh>
