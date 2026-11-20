@@ -181,7 +181,7 @@ function Contact() {
             <p
                 aria-hidden="true"
                 className="contact-big mx-auto mb-16 max-w-[1440px] select-none whitespace-nowrap text-center
-                text-[12.5vw] font-black uppercase leading-[0.85] tracking-[-0.08em] text-[#0B1730] lg:text-[14vw]"
+                text-[12.5vw] font-black uppercase leading-[0.85] tracking-[-0.08em] text-[#1C3D72] lg:text-[14vw]"
             >
                 {Array.from("¿Hablamos?").map((char, index) => (
                     <span
