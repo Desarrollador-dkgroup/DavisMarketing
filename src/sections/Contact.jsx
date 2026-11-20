@@ -500,11 +500,11 @@ function Contact() {
                                 " />
                             </div>
                             <div className="-mt-3 text-center">
-                                <p className="brand-wordmark text-3xl tracking-[0.08em]
+                                <p className="brand-wordmark text-3xl tracking-[0.035em]
                                 text-[#0B1730] xl:text-4xl">
                                     DAVIS MARKETING
                                 </p>
-                                <p className="brand-subtitle mt-1 text-base tracking-[0.2em]
+                                <p className="brand-subtitle mt-1 text-base tracking-[0.08em]
                                 text-[#0B1730]/75 xl:text-lg">
                                     DESARROLLO <span className="text-[#1C5DB2]">&</span> PRODUCCIÓN
                                 </p>
