@@ -17,6 +17,13 @@ const WHATSAPP_URL = WHATSAPP_NUMBER
     ? `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola Davis Marketing, quiero hablar de un proyecto.")}`
     : "";
 
+// Logos de proyectos bajo la marca, en el orden de la presentación.
+const PROJECT_LOGOS = [
+    { src: "/proyects/panamaViajero/LogoRectangular%202.svg", alt: "Panamá Viajero" },
+    { src: "/proyects/expoEducate/Expoeducate%201.svg", alt: "Expo Edúcate" },
+    { src: "/proyects/palaU/palau-02%201.svg", alt: "Pa' la U" },
+];
+
 const fieldClass = `w-full rounded-lg border border-[#0B1730]/15 bg-white py-3.5 pl-12 pr-4
 text-sm text-[#0B1730] outline-none transition-all duration-300 placeholder:text-[#0B1730]/40
 hover:border-[#0B1730]/25 focus:border-[#AAC551] focus:shadow-[0_0_0_3px_rgba(170,197,81,0.12)]`;
@@ -187,7 +194,7 @@ function Contact() {
             </p>
 
             <div className="mx-auto grid max-w-[1440px] gap-14
-            lg:grid-cols-[0.92fr_1.08fr] lg:items-center xl:gap-24">
+            lg:grid-cols-[0.92fr_1.08fr] lg:items-stretch xl:gap-24">
 
                 {/* ========================================= */}
                 {/* COLUMNA IZQUIERDA */}
@@ -444,7 +451,7 @@ function Contact() {
                 {/* ========================================= */}
                 {/* COLUMNA DERECHA / LOGO */}
                 {/* ========================================= */}
-                <div className="relative hidden min-h-[720px] items-start justify-center lg:flex lg:flex-col "
+                <div className="relative hidden lg:flex lg:flex-col"
                     aria-hidden="true">
                     {/* Tarjeta */}
                     <div
@@ -452,10 +459,10 @@ function Contact() {
                         onPointerMove={handleLogoMove}
                         onPointerLeave={handleLogoLeave}
                         data-cursor="Juega"
-                        className="relative flex h-[650px] w-full max-w-[680px]
+                        className="relative flex min-h-[600px] w-full max-w-[680px] flex-1
                     items-center justify-center overflow-hidden rounded-[34px]
                     border border-[#1C3D72]/20 bg-white/70
-                    shadow-[0_25px_80px_rgba(11,23,48,0.08)] backdrop-blur-sm mt-25">
+                    shadow-[0_25px_80px_rgba(11,23,48,0.08)] backdrop-blur-sm">
                         {/* Luz verde superior */}
                         <div className="absolute left-[20%] top-0 h-px w-[35%]
                         bg-gradient-to-r from-transparent via-[#AAC551] to-transparent" />
@@ -484,7 +491,7 @@ function Contact() {
                         <span className="absolute right-[8%] bottom-[27%] h-2 w-2 rounded-full
                         bg-[#3278D7]" />
                         {/* Logo */}
-                        <div className="contact-logo-tilt relative z-10 flex w-full flex-col items-center">
+                        <div className="contact-logo-tilt relative z-10 -mt-12 flex w-full flex-col items-center">
                             <div className="contact-logo-stage relative h-[300px] w-full max-w-[570px]">
                                 <div className="contact-mark contact-mark-letters absolute inset-0
                                 bg-[#B4D643]" />
@@ -493,11 +500,11 @@ function Contact() {
                                 " />
                             </div>
                             <div className="-mt-3 text-center">
-                                <p className="text-2xl font-semibold tracking-[0.55em]
-                                text-[#0B1730] xl:text-3xl">
+                                <p className="brand-wordmark text-3xl tracking-[0.08em]
+                                text-[#0B1730] xl:text-4xl">
                                     DAVIS MARKETING
                                 </p>
-                                <p className="mt-1 text-base font-semibold tracking-[0.52em]
+                                <p className="brand-subtitle mt-1 text-base tracking-[0.2em]
                                 text-[#0B1730]/75 xl:text-lg">
                                     DESARROLLO <span className="text-[#1C5DB2]">&</span> PRODUCCIÓN
                                 </p>
@@ -521,6 +528,19 @@ function Contact() {
 
                         </div>
                         
+                        {/* Logos de proyectos, alineados con la base del formulario */}
+                        <div className="absolute inset-x-0 bottom-[70px] z-10 flex items-end
+                        justify-center gap-8 px-6">
+                            {PROJECT_LOGOS.map((logo) => (
+                                <img
+                                    key={logo.src}
+                                    src={logo.src}
+                                    alt={logo.alt}
+                                    className="h-12 w-auto max-w-[140px] object-contain sm:h-14"
+                                />
+                            ))}
+                        </div>
+
                         {/* Esquina inferior */}
                         <div className="absolute bottom-0 right-0 h-px w-[30%]
                         bg-gradient-to-r from-transparent via-[#AAC551] to-transparent" />
@@ -532,7 +552,7 @@ function Contact() {
                     </div>
                     <div
                         aria-live="polite"
-                        className={`mt-15 ml-[-50px] flex justify-start transition-all duration-300${
+                        className={`absolute left-[-50px] top-full mt-6 flex justify-start transition-all duration-300${
                             status === "idle" ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100 translate-y-0"
                         }`}
                     >

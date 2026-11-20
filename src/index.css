@@ -4,6 +4,8 @@
 @import "@fontsource/open-sans/latin-600.css";
 @import "@fontsource/open-sans/latin-700.css";
 @import "@fontsource/open-sans/latin-800.css";
+@import "@fontsource/montserrat/latin-500.css";
+@import "@fontsource/montserrat/latin-700.css";
 @import "tailwindcss";
 
 @theme {
@@ -1004,4 +1006,15 @@ html.has-custom-cursor * {
 .contact-big-char.reveal.is-revealed {
   translate: 0 0;
   rotate: 0deg;
+}
+
+/* Tipografía del logotipo de la sección de contacto (Montserrat). */
+.brand-wordmark {
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+}
+
+.brand-subtitle {
+  font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
 }
