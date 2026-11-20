@@ -6,7 +6,6 @@ function Navbar() {
     const [menuAbierto, setMenuAbierto] = useState(false);
 
     const links = [
-        { name: "Inicio", href: "#inicio" },
         { name: "Contáctanos", href: "#contacto" },
     ];
 
@@ -27,7 +26,7 @@ function Navbar() {
                 <div className="mx-auto flex h-16 items-center justify-between px-6">
 
                     {/* Logo */}
-                    <a href="#inicio" aria-label="Ir al inicio">
+                    <a href="#contacto" aria-label="Ir al formulario de contacto">
                         <img
                             src={LOGO}
                             alt="Logo blanco"

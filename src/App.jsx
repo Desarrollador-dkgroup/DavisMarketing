@@ -54,6 +54,7 @@ function useSectionCurtains() {
  * El código de las secciones ocultas se conserva en el repo.
  */
 const SECCIONES = {
+  inicio: false,
   nosotros: false,
   creativeBridge: false,
   manifesto: false,
@@ -84,7 +85,7 @@ function App() {
       <NavBar />
       {/* Sin backdrop-filter aquí: rompería las secciones fijadas con ScrollTrigger. */}
       <div className="relative z-0">
-        <HERO_CINEMATIC />
+        {SECCIONES.inicio && <HERO_CINEMATIC />}
         {SECCIONES.nosotros && <div data-curtain><US /></div>}
         {SECCIONES.creativeBridge && <div data-curtain><CREATIVEBRIDGE /></div>}
         {SECCIONES.manifesto && <div data-curtain><MANIFESTO /></div>}

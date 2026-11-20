@@ -8,7 +8,7 @@ import {
     UserRound,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import { gsap, useFinePointer, useReducedMotion } from "../lib/motion";
+import { gsap, revealOnScroll, useFinePointer, useReducedMotion } from "../lib/motion";
 
 const APPS_SCRIPT_URL = import.meta.env.VITE_APPS_SCRIPT_URL;
 // Solo dígitos, con código de país (ej. 50760000000). Si no está definido, no se muestra el botón.
@@ -39,6 +39,16 @@ function Contact() {
     const reducedMotion = useReducedMotion();
     const finePointer = useFinePointer();
 
+
+    // Titular «¿Hablamos?»: las letras caen y rebotan al entrar en pantalla.
+    useEffect(() => {
+        if (reducedMotion) return undefined;
+        return revealOnScroll(".contact-big-char", {
+            trigger: ".contact-big",
+            start: "top 85%",
+            stagger: 0.05,
+        });
+    }, [reducedMotion]);
 
     // Logo interactivo: la tarjeta gira en 3D y la esfera azul persigue al ratón.
     const handleLogoMove = (event) => {
@@ -159,6 +169,22 @@ function Contact() {
             <div aria-hidden="true" className="absolute -right-40 top-20 -z-10
             h-[450px] w-[450px] rounded-full bg-[#1C3D72]/8 blur-[160px]" />
 
+
+            {/* Titular gigante */}
+            <p
+                aria-hidden="true"
+                className="contact-big mx-auto mb-16 max-w-[1440px] select-none whitespace-nowrap text-center
+                text-[12.5vw] font-black uppercase leading-[0.85] tracking-[-0.08em] text-[#0B1730] lg:text-[14vw]"
+            >
+                {Array.from("¿Hablamos?").map((char, index) => (
+                    <span
+                        key={index}
+                        className={`contact-big-char inline-block ${index === 0 || index === 9 ? "text-[#AAC551]" : ""}`}
+                    >
+                        {char}
+                    </span>
+                ))}
+            </p>
 
             <div className="mx-auto grid max-w-[1440px] gap-14
             lg:grid-cols-[0.92fr_1.08fr] lg:items-center xl:gap-24">
