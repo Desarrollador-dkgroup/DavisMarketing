@@ -451,7 +451,7 @@ function Contact() {
                 {/* ========================================= */}
                 {/* COLUMNA DERECHA / LOGO */}
                 {/* ========================================= */}
-                <div className="relative hidden lg:flex lg:flex-col lg:justify-center"
+                <div className="relative hidden lg:flex lg:flex-col lg:justify-between"
                     aria-hidden="true">
                     {/* Tarjeta */}
                     <div
@@ -459,7 +459,7 @@ function Contact() {
                         onPointerMove={handleLogoMove}
                         onPointerLeave={handleLogoLeave}
                         data-cursor="Juega"
-                        className="relative flex h-[460px] w-full max-w-[680px]
+                        className="relative flex min-h-[460px] w-full max-w-[680px] flex-1
                     items-center justify-center overflow-hidden rounded-[34px]
                     border border-[#1C3D72]/20 bg-white/70
                     shadow-[0_25px_80px_rgba(11,23,48,0.08)] backdrop-blur-sm">
@@ -499,7 +499,7 @@ function Contact() {
                                 h-14 w-14 rounded-full bg-[#1C3D72]
                                 " />
                             </div>
-                            <div className="-mt-3 text-center">
+                            <div className="mt-6 text-center">
                                 <p className="brand-wordmark text-3xl tracking-[0.035em]
                                 text-[#0B1730] xl:text-4xl">
                                     DAVIS MARKETING
@@ -539,13 +539,13 @@ function Contact() {
                     </div>
 
                     {/* Logos de proyectos, debajo de la tarjeta y alineados con el formulario */}
-                    <div className="mt-8 flex items-end justify-center gap-8">
+                    <div className="mt-8 flex w-full max-w-[680px] items-end justify-between">
                         {PROJECT_LOGOS.map((logo) => (
                             <img
                                 key={logo.src}
                                 src={logo.src}
                                 alt={logo.alt}
-                                className="h-[60px] w-auto max-w-[175px] object-contain sm:h-[70px]"
+                                className="h-[78px] w-auto max-w-[230px] object-contain sm:h-[91px]"
                             />
                         ))}
                     </div>
