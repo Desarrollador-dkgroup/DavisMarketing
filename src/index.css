@@ -488,6 +488,7 @@ body {
 }
 
 .contact-logo-stage {
+  animation: contact-mark-float 5s ease-in-out infinite;
   filter: drop-shadow(0 10px 10px rgb(0 0 0 / 30%));
   perspective: 900px;
 }
@@ -500,9 +501,10 @@ body {
   filter: drop-shadow(12px 14px 0 rgb(80 96 27 / 70%));
 }
 
-/* La bolita viaja con las letras: sin flotación propia. */
+/* La bolita reacciona al ratón (la variable la mueve GSAP) y flota con las letras. */
 .contact-logo-sphere {
-  animation: none;
+  translate: var(--sphere-x, 0px) var(--sphere-y, 0px);
+  animation: contact-sphere-float 5s ease-in-out infinite;
 }
 
 @keyframes project-enter-from-right {

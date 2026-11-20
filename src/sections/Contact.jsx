@@ -70,6 +70,12 @@ function Contact() {
             duration: 0.6,
             ease: "power3.out",
         });
+        gsap.to(card.querySelector(".contact-logo-sphere"), {
+            "--sphere-x": `${x * 160}px`,
+            "--sphere-y": `${y * 120}px`,
+            duration: 0.9,
+            ease: "power3.out",
+        });
     };
 
     const handleLogoLeave = () => {
@@ -80,6 +86,12 @@ function Contact() {
             rotateX: 0,
             duration: 1.2,
             ease: "elastic.out(1, 0.4)",
+        });
+        gsap.to(card.querySelector(".contact-logo-sphere"), {
+            "--sphere-x": "0px",
+            "--sphere-y": "0px",
+            duration: 1.4,
+            ease: "elastic.out(1, 0.35)",
         });
     };
 
@@ -483,17 +495,17 @@ function Contact() {
                             <div className="contact-logo-stage relative h-[260px] w-full max-w-[570px]">
                                 <div className="contact-mark contact-mark-letters absolute inset-0
                                 bg-[#B4D643]" />
-                                <span className="contact-logo-sphere absolute left-[56%] top-[31%]
-                                h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1C3D72]" />
+                                <span className="contact-logo-sphere absolute left-[52%] top-[14%]
+                                -ml-7 -mt-7 h-14 w-14 rounded-full bg-[#1C3D72]" />
                             </div>
                             <div className="mx-auto mt-6 w-full max-w-[570px] text-center [container-type:inline-size]">
                                 <p className="brand-wordmark whitespace-nowrap text-[10cqw] tracking-[0.035em]
-                                text-[#0B1730]">
+                                text-[#1C3D72]">
                                     DAVIS MARKETING
                                 </p>
-                                <p className="brand-subtitle mt-1 text-base tracking-[0.08em]
-                                text-[#0B1730]/75 xl:text-lg">
-                                    DESARROLLO <span className="text-[#1C5DB2]">&</span> PRODUCCIÓN
+                                <p className="brand-subtitle mt-1 whitespace-nowrap text-[6.3cqw] tracking-[0.08em]
+                                text-[#1C3D72]">
+                                    DESARROLLO &amp; PRODUCCIÓN
                                 </p>
 
 
@@ -515,6 +527,19 @@ function Contact() {
 
                         </div>
                         
+                        {/* Logos de proyectos, dentro de la tarjeta y alineados con la base del formulario */}
+                        <div className="absolute inset-x-0 bottom-0 z-10 flex items-end
+                        justify-between px-8">
+                            {PROJECT_LOGOS.map((logo) => (
+                                <img
+                                    key={logo.src}
+                                    src={logo.src}
+                                    alt={logo.alt}
+                                    className="h-[78px] w-auto max-w-[230px] object-contain sm:h-[91px]"
+                                />
+                            ))}
+                        </div>
+
                         {/* Esquina inferior */}
                         <div className="absolute bottom-0 right-0 h-px w-[30%]
                         bg-gradient-to-r from-transparent via-[#AAC551] to-transparent" />
@@ -525,17 +550,6 @@ function Contact() {
 
                     </div>
 
-                    {/* Logos de proyectos, debajo de la tarjeta y alineados con el formulario */}
-                    <div className="mt-8 flex w-full max-w-[680px] items-end justify-between">
-                        {PROJECT_LOGOS.map((logo) => (
-                            <img
-                                key={logo.src}
-                                src={logo.src}
-                                alt={logo.alt}
-                                className="h-[78px] w-auto max-w-[230px] object-contain sm:h-[91px]"
-                            />
-                        ))}
-                    </div>
                     <div
                         aria-live="polite"
                         className={`absolute left-[-50px] top-full mt-6 flex justify-start transition-all duration-300${
