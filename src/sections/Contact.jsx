@@ -203,8 +203,8 @@ function Contact() {
                 <div className="relative">
 
                     {/* Título */}
-                    <h2 id="contact-title" className="max-w-[620px] text-4xl font-bold
-                    leading-[1.05] tracking-tight text-[#0B1730] sm:text-5xl xl:text-6xl">
+                    <h2 id="contact-title" className="max-w-[680px] text-3xl font-bold
+                    leading-[1.05] tracking-tight text-[#0B1730] sm:text-4xl xl:text-5xl">
                         Sabemos lo importante que es tu marca y que tenga un gran impacto
                     </h2>
 
