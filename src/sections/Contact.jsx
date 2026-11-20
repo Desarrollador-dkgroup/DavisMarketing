@@ -545,7 +545,7 @@ function Contact() {
                                 key={logo.src}
                                 src={logo.src}
                                 alt={logo.alt}
-                                className="h-12 w-auto max-w-[140px] object-contain sm:h-14"
+                                className="h-[60px] w-auto max-w-[175px] object-contain sm:h-[70px]"
                             />
                         ))}
                     </div>
