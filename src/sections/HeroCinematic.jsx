@@ -1,5 +1,4 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { ArrowDown } from "lucide-react";
 import ParticleTitle from "../components/ParticleTitle";
 import { useReducedMotion } from "../lib/motion";
 
@@ -72,16 +71,6 @@ function HeroCinematic() {
         </h1>
       </div>
 
-      <a
-        href="#contacto"
-        data-cursor="Contactar"
-        aria-label="Bajar al formulario de contacto"
-        className="hero-scroll-cue absolute bottom-8 left-1/2 z-20 grid h-12 w-12 -translate-x-1/2
-        place-items-center rounded-full border border-white/30 text-white/80 backdrop-blur-sm
-        transition-colors hover:border-[#AAC551] hover:text-[#AAC551]"
-      >
-        <ArrowDown className="h-5 w-5" strokeWidth={1.6} />
-      </a>
     </section>
   );
 }
