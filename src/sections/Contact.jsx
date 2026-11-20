@@ -70,12 +70,6 @@ function Contact() {
             duration: 0.6,
             ease: "power3.out",
         });
-        gsap.to(card.querySelector(".contact-logo-sphere"), {
-            "--sphere-x": `${x * 160}px`,
-            "--sphere-y": `${y * 120}px`,
-            duration: 0.9,
-            ease: "power3.out",
-        });
     };
 
     const handleLogoLeave = () => {
@@ -86,12 +80,6 @@ function Contact() {
             rotateX: 0,
             duration: 1.2,
             ease: "elastic.out(1, 0.4)",
-        });
-        gsap.to(card.querySelector(".contact-logo-sphere"), {
-            "--sphere-x": "0px",
-            "--sphere-y": "0px",
-            duration: 1.4,
-            ease: "elastic.out(1, 0.35)",
         });
     };
 
@@ -205,7 +193,7 @@ function Contact() {
                     {/* Título */}
                     <h2 id="contact-title" className="max-w-[620px] text-4xl font-bold
                     leading-[1.05] tracking-tight text-[#0B1730] sm:text-5xl xl:text-6xl">
-                        Sabemos lo importante que es iniciar tu proyecto
+                        Sabemos lo importante que es tu marca y que tenga un gran impacto
                     </h2>
 
 
@@ -495,13 +483,12 @@ function Contact() {
                             <div className="contact-logo-stage relative h-[260px] w-full max-w-[570px]">
                                 <div className="contact-mark contact-mark-letters absolute inset-0
                                 bg-[#B4D643]" />
-                                <span className="contact-logo-sphere absolute left-[42%] top-[15%]
-                                h-14 w-14 rounded-full bg-[#1C3D72]
-                                " />
+                                <span className="contact-logo-sphere absolute left-[56%] top-[31%]
+                                h-14 w-14 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1C3D72]" />
                             </div>
-                            <div className="mt-6 text-center">
-                                <p className="brand-wordmark text-3xl tracking-[0.035em]
-                                text-[#0B1730] xl:text-4xl">
+                            <div className="mx-auto mt-6 w-full max-w-[570px] text-center [container-type:inline-size]">
+                                <p className="brand-wordmark whitespace-nowrap text-[10cqw] tracking-[0.035em]
+                                text-[#0B1730]">
                                     DAVIS MARKETING
                                 </p>
                                 <p className="brand-subtitle mt-1 text-base tracking-[0.08em]
