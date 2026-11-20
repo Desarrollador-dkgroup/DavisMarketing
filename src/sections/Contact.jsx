@@ -200,7 +200,7 @@ function Contact() {
                 {/* COLUMNA IZQUIERDA */}
                 {/* ========================================= */}
 
-                <div>
+                <div className="relative">
 
                     {/* Título */}
                     <h2 id="contact-title" className="max-w-[620px] text-4xl font-bold
@@ -429,7 +429,7 @@ function Contact() {
 
                     <div
                         aria-live="polite"
-                        className={`mt-4 flex justify-start transition-all duration-300 ${
+                        className={`absolute left-0 top-full mt-4 flex justify-start transition-all duration-300 ${
                             status === "idle" ? "pointer-events-none opacity-0 translate-y-2" : "opacity-100 translate-y-0"
                         }`}
                     >
@@ -459,7 +459,7 @@ function Contact() {
                         onPointerMove={handleLogoMove}
                         onPointerLeave={handleLogoLeave}
                         data-cursor="Juega"
-                        className="relative flex min-h-[600px] w-full max-w-[680px] flex-1
+                        className="relative flex min-h-[300px] w-full max-w-[680px] flex-1
                     items-center justify-center overflow-hidden rounded-[34px]
                     border border-[#1C3D72]/20 bg-white/70
                     shadow-[0_25px_80px_rgba(11,23,48,0.08)] backdrop-blur-sm">
@@ -528,19 +528,6 @@ function Contact() {
 
                         </div>
                         
-                        {/* Logos de proyectos, alineados con la base del formulario */}
-                        <div className="absolute inset-x-0 bottom-[70px] z-10 flex items-end
-                        justify-center gap-8 px-6">
-                            {PROJECT_LOGOS.map((logo) => (
-                                <img
-                                    key={logo.src}
-                                    src={logo.src}
-                                    alt={logo.alt}
-                                    className="h-12 w-auto max-w-[140px] object-contain sm:h-14"
-                                />
-                            ))}
-                        </div>
-
                         {/* Esquina inferior */}
                         <div className="absolute bottom-0 right-0 h-px w-[30%]
                         bg-gradient-to-r from-transparent via-[#AAC551] to-transparent" />
@@ -549,6 +536,18 @@ function Contact() {
                         rounded-full bg-[#C8EA50]
                         shadow-[0_0_18px_7px_rgba(200,234,80,0.4)]" />
 
+                    </div>
+
+                    {/* Logos de proyectos, debajo de la tarjeta y alineados con el formulario */}
+                    <div className="mt-8 flex items-end justify-center gap-8">
+                        {PROJECT_LOGOS.map((logo) => (
+                            <img
+                                key={logo.src}
+                                src={logo.src}
+                                alt={logo.alt}
+                                className="h-12 w-auto max-w-[140px] object-contain sm:h-14"
+                            />
+                        ))}
                     </div>
                     <div
                         aria-live="polite"
