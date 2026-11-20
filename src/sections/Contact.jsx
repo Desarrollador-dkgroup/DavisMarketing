@@ -451,7 +451,7 @@ function Contact() {
                 {/* ========================================= */}
                 {/* COLUMNA DERECHA / LOGO */}
                 {/* ========================================= */}
-                <div className="relative hidden lg:flex lg:flex-col"
+                <div className="relative hidden lg:flex lg:flex-col lg:justify-center"
                     aria-hidden="true">
                     {/* Tarjeta */}
                     <div
@@ -459,7 +459,7 @@ function Contact() {
                         onPointerMove={handleLogoMove}
                         onPointerLeave={handleLogoLeave}
                         data-cursor="Juega"
-                        className="relative flex min-h-[300px] w-full max-w-[680px] flex-1
+                        className="relative flex h-[460px] w-full max-w-[680px]
                     items-center justify-center overflow-hidden rounded-[34px]
                     border border-[#1C3D72]/20 bg-white/70
                     shadow-[0_25px_80px_rgba(11,23,48,0.08)] backdrop-blur-sm">
@@ -491,8 +491,8 @@ function Contact() {
                         <span className="absolute right-[8%] bottom-[27%] h-2 w-2 rounded-full
                         bg-[#3278D7]" />
                         {/* Logo */}
-                        <div className="contact-logo-tilt relative z-10 -mt-12 flex w-full flex-col items-center">
-                            <div className="contact-logo-stage relative h-[300px] w-full max-w-[570px]">
+                        <div className="contact-logo-tilt relative z-10 flex w-full flex-col items-center">
+                            <div className="contact-logo-stage relative h-[260px] w-full max-w-[570px]">
                                 <div className="contact-mark contact-mark-letters absolute inset-0
                                 bg-[#B4D643]" />
                                 <span className="contact-logo-sphere absolute left-[42%] top-[15%]
