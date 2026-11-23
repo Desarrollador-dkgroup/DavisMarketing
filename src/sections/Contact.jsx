@@ -453,7 +453,6 @@ function Contact() {
                         ref={logoCardRef}
                         onPointerMove={handleLogoMove}
                         onPointerLeave={handleLogoLeave}
-                        data-cursor="Juega"
                         className="relative flex min-h-[460px] w-full max-w-[680px] flex-1
                     flex-col items-center justify-start pt-9 overflow-hidden rounded-[34px]
                     border border-[#1C3D72]/20 bg-white/70
