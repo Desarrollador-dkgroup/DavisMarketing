@@ -70,12 +70,6 @@ function Contact() {
             duration: 0.6,
             ease: "power3.out",
         });
-        gsap.to(card.querySelector(".contact-logo-sphere"), {
-            "--sphere-x": `${x * 160}px`,
-            "--sphere-y": `${y * 120}px`,
-            duration: 0.9,
-            ease: "power3.out",
-        });
     };
 
     const handleLogoLeave = () => {
@@ -86,12 +80,6 @@ function Contact() {
             rotateX: 0,
             duration: 1.2,
             ease: "elastic.out(1, 0.4)",
-        });
-        gsap.to(card.querySelector(".contact-logo-sphere"), {
-            "--sphere-x": "0px",
-            "--sphere-y": "0px",
-            duration: 1.4,
-            ease: "elastic.out(1, 0.35)",
         });
     };
 
