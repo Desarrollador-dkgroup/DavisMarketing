@@ -489,7 +489,7 @@ function Contact() {
                             <div className="contact-logo-stage relative h-[260px] w-full max-w-[570px]">
                                 <div className="contact-mark contact-mark-letters absolute inset-0
                                 bg-[#B4D643]" />
-                                <span className="contact-logo-sphere absolute left-[46%] top-[16%]
+                                <span className="contact-logo-sphere absolute left-[46%] top-[15%]
                                 -ml-7 -mt-7 h-14 w-14 rounded-full bg-[#1C3D72]" />
                             </div>
                             <div className="mx-auto mt-1 w-full max-w-[570px] text-center [container-type:inline-size]">
