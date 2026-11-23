@@ -502,7 +502,7 @@ function Contact() {
                             <div className="contact-logo-stage relative h-[260px] w-full max-w-[570px]">
                                 <div className="contact-mark contact-mark-letters absolute inset-0
                                 bg-[#B4D643]" />
-                                <span className="contact-logo-sphere absolute left-[46%] top-[24%]
+                                <span className="contact-logo-sphere absolute left-[46%] top-[19%]
                                 -ml-7 -mt-7 h-14 w-14 rounded-full bg-[#1C3D72]" />
                             </div>
                             <div className="mx-auto mt-1 w-full max-w-[570px] text-center [container-type:inline-size]">
@@ -510,7 +510,7 @@ function Contact() {
                                 text-[#1C3D72]">
                                     DAVIS MARKETING
                                 </p>
-                                <p className="brand-subtitle mt-2 whitespace-nowrap text-[6.3cqw] leading-none tracking-[0.08em]
+                                <p className="brand-subtitle mt-0 whitespace-nowrap text-[6.3cqw] leading-none tracking-[0.08em]
                                 text-[#1C3D72]">
                                     DESARROLLO &amp; PRODUCCIÓN
                                 </p>
