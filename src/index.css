@@ -501,9 +501,9 @@ body {
   filter: drop-shadow(12px 14px 0 rgb(80 96 27 / 70%));
 }
 
-/* La bolita va dentro del mismo bloque que las letras: se mueve con ellas, sin desplazamiento propio. */
+/* La bolita va dentro del bloque de las letras y se mueve solo con él, sin animación propia. */
 .contact-logo-sphere {
-  animation: contact-sphere-float 5s ease-in-out infinite;
+  animation: none;
 }
 
 @keyframes project-enter-from-right {
